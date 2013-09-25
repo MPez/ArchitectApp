@@ -1,0 +1,53 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Position"
+    },
+    "designerId": "1a882941-a055-45b1-a0a0-fe213a357c64",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "latitude",
+                "type": "string"
+            },
+            "designerId": "b57105da-284b-4494-8456-344533f3c941"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "longitude",
+                "type": "string"
+            },
+            "designerId": "a0eac524-556a-407b-8644-0e3def20f68d"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "timestamp",
+                "type": "string"
+            },
+            "designerId": "4e5ab154-742a-402c-89f0-fbc77cbff20d"
+        }
+    ]
+}

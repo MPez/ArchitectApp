@@ -1,0 +1,179 @@
+{
+    "name": "ArchitectApp",
+    "settings": {
+        "urlPrefix": "http://localhost/senchaTouchProjects/ArchitectApp/",
+        "exportPath": "",
+        "sdkPath": "/var/www/senchaTouchProjects/2.3.0.294"
+    },
+    "xdsVersion": "2.2.2",
+    "xdsBuild": 991,
+    "schemaVersion": 1,
+    "upgradeVersion": 210000000503,
+    "framework": "touch22",
+    "topInstanceFileMap": {
+        "9653890a-1da4-4634-92d9-24bbba1bd014": {
+            "paths": [
+                "metadata/view/Main",
+                "app/view/override/Main.js",
+                "app/view/Main.js"
+            ],
+            "className": "Main"
+        },
+        "f4b975e2-0737-4227-bae1-af9bd7d98b1b": {
+            "paths": [
+                "metadata/resource/Library"
+            ],
+            "className": "Library"
+        },
+        "b872ceb2-d6c8-4a63-a1ca-72b7ddfd75ef": {
+            "paths": [
+                "metadata/controller/ArchitectApp",
+                "app/controller/override/ArchitectApp.js",
+                "app/controller/ArchitectApp.js"
+            ],
+            "className": "ArchitectApp"
+        },
+        "b57f949b-34c4-4e2a-9b7f-25ec6f5dad1b": {
+            "paths": [
+                "metadata/store/Postions",
+                "app/store/override/Postions.js",
+                "app/store/Postions.js"
+            ],
+            "className": "Postions"
+        },
+        "1a882941-a055-45b1-a0a0-fe213a357c64": {
+            "paths": [
+                "metadata/model/Position",
+                "app/model/override/Position.js",
+                "app/model/Position.js"
+            ],
+            "className": "Position"
+        },
+        "3e769654-87e2-4341-87f5-3964d9a7b444": {
+            "paths": [
+                "metadata/store/Sensors",
+                "app/store/override/Sensors.js",
+                "app/store/Sensors.js"
+            ],
+            "className": "Sensors"
+        },
+        "b6e6ec49-c212-45ba-953a-f64f01d3e006": {
+            "paths": [
+                "metadata/model/Sensor",
+                "app/model/override/Sensor.js",
+                "app/model/Sensor.js"
+            ],
+            "className": "Sensor"
+        },
+        "1d069a6a-3def-4dc4-af4a-e48a1f043c6e": {
+            "paths": [
+                "metadata/store/Contacts",
+                "app/store/override/Contacts.js",
+                "app/store/Contacts.js"
+            ],
+            "className": "Contacts"
+        },
+        "ff17066c-2a3e-4e95-b831-cbe24617a356": {
+            "paths": [
+                "metadata/model/Contact",
+                "app/model/override/Contact.js",
+                "app/model/Contact.js"
+            ],
+            "className": "Contact"
+        },
+        "6ddc3a22-ee9e-42a9-8c79-34f5d9fecc40": {
+            "paths": [
+                "metadata/resource/packager",
+                "",
+                "packager.json"
+            ],
+            "className": "packager"
+        },
+        "252dfb6b-5d1d-47a6-8dbb-bc401e6c8257": {
+            "paths": [
+                "metadata/store/Barcodes",
+                "app/store/override/Barcodes.js",
+                "app/store/Barcodes.js"
+            ],
+            "className": "Barcodes"
+        },
+        "35225c05-1a5a-42e6-b80c-c6729cc7bef3": {
+            "paths": [
+                "metadata/model/Barcode",
+                "app/model/override/Barcode.js",
+                "app/model/Barcode.js"
+            ],
+            "className": "Barcode"
+        },
+        "6d56a246-3ee6-488c-8235-1020bb37dff1": {
+            "paths": [
+                "metadata/model/Picture",
+                "app/model/override/Picture.js",
+                "app/model/Picture.js"
+            ],
+            "className": "Picture"
+        },
+        "9d74bdb2-1413-4f25-85b7-86f0967df19f": {
+            "paths": [
+                "metadata/store/Pictures",
+                "app/store/override/Pictures.js",
+                "app/store/Pictures.js"
+            ],
+            "className": "Pictures"
+        },
+        "dda08342-d2e9-4e7c-9b13-9cca134df09e": {
+            "paths": [
+                "metadata/resource/GoogleMapsAPI1"
+            ],
+            "className": "GoogleMapsAPI1"
+        },
+        "23575e37-6659-4bda-83d9-01d5ecf873e7": {
+            "paths": [
+                "metadata/model/PersonalInfo",
+                "app/model/override/PersonalInfo.js",
+                "app/model/PersonalInfo.js"
+            ],
+            "className": "PersonalInfo"
+        },
+        "2559bb7e-64fc-4beb-8b68-053e7c37a849": {
+            "paths": [
+                "metadata/store/PersonalInfos",
+                "app/store/override/PersonalInfos.js",
+                "app/store/PersonalInfos.js"
+            ],
+            "className": "PersonalInfos"
+        }
+    },
+    "viewOrderMap": {
+        "view": [
+            "9653890a-1da4-4634-92d9-24bbba1bd014"
+        ],
+        "store": [
+            "b57f949b-34c4-4e2a-9b7f-25ec6f5dad1b",
+            "3e769654-87e2-4341-87f5-3964d9a7b444",
+            "1d069a6a-3def-4dc4-af4a-e48a1f043c6e",
+            "252dfb6b-5d1d-47a6-8dbb-bc401e6c8257",
+            "9d74bdb2-1413-4f25-85b7-86f0967df19f",
+            "2559bb7e-64fc-4beb-8b68-053e7c37a849"
+        ],
+        "controller": [
+            "b872ceb2-d6c8-4a63-a1ca-72b7ddfd75ef"
+        ],
+        "model": [
+            "1a882941-a055-45b1-a0a0-fe213a357c64",
+            "b6e6ec49-c212-45ba-953a-f64f01d3e006",
+            "ff17066c-2a3e-4e95-b831-cbe24617a356",
+            "35225c05-1a5a-42e6-b80c-c6729cc7bef3",
+            "6d56a246-3ee6-488c-8235-1020bb37dff1",
+            "23575e37-6659-4bda-83d9-01d5ecf873e7"
+        ],
+        "resource": [
+            "f4b975e2-0737-4227-bae1-af9bd7d98b1b",
+            "6ddc3a22-ee9e-42a9-8c79-34f5d9fecc40",
+            "dda08342-d2e9-4e7c-9b13-9cca134df09e"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

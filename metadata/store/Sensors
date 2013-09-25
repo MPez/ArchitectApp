@@ -1,0 +1,38 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "data": [
+            "[",
+            "    { name: 'File', description: 'Permette di scrivere o leggere un file nella memoria del dispositivo' },",
+            "\t{ name: 'Camera', description: 'Permette di catturare un\\'immagine tramite la fotocamera o la galleria del dispositivo'},",
+            "\t{ name: 'Contacts' , description: 'Permette di consultare e modificare la rubrica del dispositivo'},",
+            "\t{ name: 'Media', description: 'Permette di catturare o riprodurre file audio tramite il dispositivo' },",
+            "\t{ name: 'Geolocation', description: 'Permette di visualizzare la posizione corrente del dispositivo'},",
+            "\t{ name: 'Barcode', description: 'Permette di leggere un barcode tramite la fotocamera del dispositivo'}",
+            "]"
+        ],
+        "model": "Sensor",
+        "storeId": "Sensors",
+        "designer|userClassName": "Sensors"
+    },
+    "designerId": "3e769654-87e2-4341-87f5-3964d9a7b444",
+    "cn": [
+        {
+            "type": "Ext.util.Sorter",
+            "reference": {
+                "name": "sorters",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "property": "name"
+            },
+            "designerId": "d407f0a3-7db1-4a0b-8a35-5e091bf85f1c"
+        }
+    ]
+}

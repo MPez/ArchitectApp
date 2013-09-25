@@ -1,0 +1,28 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "model": "Picture",
+        "storeId": "Pictures",
+        "designer|userClassName": "Pictures",
+        "requires": [
+            "Ext.data.proxy.Sql"
+        ]
+    },
+    "designerId": "9d74bdb2-1413-4f25-85b7-86f0967df19f",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Sql",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "designerId": "aadb30e4-0270-4c74-89de-353d97fdd360"
+        }
+    ]
+}

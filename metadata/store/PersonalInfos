@@ -1,0 +1,28 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "model": "PersonalInfo",
+        "storeId": "PersonalInfos",
+        "designer|userClassName": "PersonalInfos",
+        "requires": [
+            "Ext.data.proxy.Sql"
+        ]
+    },
+    "designerId": "2559bb7e-64fc-4beb-8b68-053e7c37a849",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Sql",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "designerId": "ae9ecd77-3cf2-4c3b-bd2b-36ef332efbc1"
+        }
+    ]
+}

@@ -1,0 +1,723 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "ArchitectApp",
+        "requires": [
+            "Ext.MessageBox",
+            "Ext.JSON"
+        ]
+    },
+    "designerId": "b872ceb2-d6c8-4a63-a1ca-72b7ddfd75ef",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLocateButtonTap",
+                "implHandler": [
+                    "console.log('onLocateButtonTap');",
+                    "",
+                    "Ext.device.Geolocation.getCurrentPosition({",
+                    "    success: function(position) {",
+                    "        var record = Ext.create('ArchitectApp.model.Position', {",
+                    "            latitude: position.coords.latitude,",
+                    "            longitude: position.coords.longitude,",
+                    "            timestamp: position.timestamp",
+                    "        });",
+                    "        var store = Ext.getStore('Positions');",
+                    "        store.add(record);",
+                    "        store.sync();",
+                    "",
+                    "        var mapCmp = Ext.ComponentQuery.query('map#map')[0];",
+                    "        mapCmp.setMapCenter(position.coords);",
+                    "        mapCmp.setMapOptions({",
+                    "            zoom: 15",
+                    "        });",
+                    "",
+                    "        var marker = new google.maps.Marker({",
+                    "            map: mapCmp.getMap(),",
+                    "            position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),",
+                    "            icon: 'resources/images/maps-32.png',",
+                    "            animation: google.maps.Animation.DROP",
+                    "        });",
+                    "    },",
+                    "",
+                    "    failure: function() {",
+                    "        Ext.Msg.alert('Error', 'Something went wrong!');",
+                    "    }",
+                    "});"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#locateButton"
+            },
+            "designerId": "dcb50176-0bed-4de4-9afb-2de52be872f1"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onPositionButtonTap",
+                "implHandler": [
+                    "console.log('onPositionButtonTap');",
+                    "",
+                    "Ext.getStore('Positions').load();",
+                    "var container = Ext.ComponentQuery.query('container#locationView');",
+                    "container[0].setActiveItem('#locationVisitedPanel');"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#positionButton"
+            },
+            "designerId": "f7e1171e-ae2a-4d95-bb11-8049b26f1c31"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onBackLocationButtonTap",
+                "implHandler": [
+                    "console.log('onBackLocationButtonTap');",
+                    "",
+                    "var container = Ext.ComponentQuery.query('container#locationView');",
+                    "container[0].setActiveItem('#locationPanel');"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#backLocationButton"
+            },
+            "designerId": "d4f0cc60-fbba-4c99-afb6-2f67e87b57cd"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onSensorListItemTap",
+                "implHandler": [
+                    "console.log('onSensorListItemTap');",
+                    "",
+                    "var name = record.get('name').toLowerCase();",
+                    "",
+                    "if(name == 'geolocation') {",
+                    "    Ext.ComponentQuery.query('container#mainView')[0].setActiveItem('#locationView');",
+                    "} else {",
+                    "    if(name == 'contacts') {",
+                    "        Ext.ComponentQuery.query('button#loadContactsButton')[0].setHidden(false);",
+                    "        Ext.ComponentQuery.query('button#trashContactsButton')[0].setHidden(false);",
+                    "    } else {",
+                    "        Ext.ComponentQuery.query('button#loadContactsButton')[0].setHidden(true);",
+                    "        Ext.ComponentQuery.query('button#trashContactsButton')[0].setHidden(true);",
+                    "",
+                    "        if(name == 'file') {",
+                    "            console.log('onFileItem');",
+                    "",
+                    "            name += 'Form';",
+                    "",
+                    "            var personalInfoStore = Ext.getStore('PersonalInfos'),",
+                    "                newInfo = null;",
+                    "",
+                    "",
+                    "            if (personalInfoStore.getCount() === 0) {",
+                    "                newInfo = Ext.create('ArchitectApp.model.PersonalInfo', {",
+                    "                    id: 1,",
+                    "                    name: 'Soluzioni',",
+                    "                    surname: 'Software',",
+                    "                    email: 'info@soluzioni-sw.it',",
+                    "                    address: 'Via dei Ronchi 21',",
+                    "                    birthday: '01/01/1986',",
+                    "                    sex: 'male',",
+                    "                    colour: 'blue' ,",
+                    "                    touch: '',",
+                    "                    cordova: '',",
+                    "                    architect: ''",
+                    "                });",
+                    "            } else {",
+                    "                newInfo = personalInfoStore.getAt(0);",
+                    "            }",
+                    "",
+                    "            var form = Ext.ComponentQuery.query('#fileForm')[0];",
+                    "            form.setRecord(newInfo);",
+                    "        }",
+                    "    }",
+                    "",
+                    "    Ext.ComponentQuery.query('container#sensorView')[0].setActiveItem('#' + name);",
+                    "}"
+                ],
+                "name": "itemtap",
+                "designer|targetType": "Ext.dataview.List",
+                "designer|controlQuery": "list#sensorList"
+            },
+            "designerId": "eec78dde-ba16-4847-9812-09ea6cddaa4f"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onCameraButtonTap",
+                "implHandler": [
+                    "console.log('onCameraButtonTap');",
+                    "",
+                    "navigator.camera.getPicture(this.onCameraCaptureSuccess, this.onCameraCaptureFailure, {",
+                    "    quality : 100,",
+                    "    destinationType : Camera.DestinationType.FILE_URI,",
+                    "    sourceType : Camera.PictureSourceType.CAMERA,",
+                    "    encodingType: Camera.EncodingType.JPEG,",
+                    "    targetWidth: 400,",
+                    "    targetHeight: 400,",
+                    "    correctOrientation: true,",
+                    "    saveToPhotoAlbum: false",
+                    "});",
+                    "",
+                    "",
+                    "/*Ext.device.Camera.capture({",
+                    "success: this.onCameraCaptureSuccess,",
+                    "failure: this.onCameraCaptureFailure,",
+                    "quality: 100,",
+                    "source: 'camera',",
+                    "width: 400,",
+                    "height: 400,",
+                    "destination: 'file'",
+                    "});*/"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#cameraButton"
+            },
+            "designerId": "c3234f6f-62ad-49a6-a0fd-90695470faa2"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onCameraCaptureSuccess",
+                "designer|params": [
+                    "image"
+                ],
+                "implHandler": [
+                    "console.log('onCameraCaptureSuccess');",
+                    "",
+                    "var store = Ext.getStore('Pictures');",
+                    "var record = Ext.create('ArchitectApp.model.Picture', {",
+                    "    url: image,",
+                    "    timestamp: new Date()",
+                    "});",
+                    "store.add(record);",
+                    "store.sync();"
+                ]
+            },
+            "designerId": "6d32ccf9-b7c3-402a-a643-4b55d7fd64ef"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onCameraCaptureFailure",
+                "implHandler": [
+                    "console.log('onCameraCaptureFailure');",
+                    "",
+                    "Ext.Msg.alert('Error', 'Something went wrong.');"
+                ]
+            },
+            "designerId": "8c48498f-c8e1-4a23-95ce-f155b085473c"
+        },
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "launch",
+                "implHandler": [
+                    "console.log('launch');",
+                    "",
+                    "Ext.getStore('Barcodes').load();",
+                    "Ext.getStore('Pictures').load();",
+                    "Ext.getStore('Contacts').load();",
+                    "Ext.getStore('PersonalInfos').load();"
+                ]
+            },
+            "designerId": "2b07826f-fa9e-46bd-a32f-59e3e5a17a04"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onGalleryButtonTap",
+                "implHandler": [
+                    "console.log('onGalleryButtonTap');",
+                    "",
+                    "navigator.camera.getPicture(this.onCameraCaptureSuccess, this.onCameraCaptureFailure, {",
+                    "    quality : 100,",
+                    "    destinationType : Camera.DestinationType.FILE_URI,",
+                    "    sourceType : Camera.PictureSourceType.PHOTOLIBRARY,",
+                    "    encodingType: Camera.EncodingType.JPEG,",
+                    "    targetWidth: 400,",
+                    "    targetHeight: 400,",
+                    "    correctOrientation: true,",
+                    "    saveToPhotoAlbum: false",
+                    "});",
+                    "",
+                    "",
+                    "/*Ext.device.Camera.capture({",
+                    "success: this.onCameraCaptureSuccess,",
+                    "failure: this.onCameraCaptureFailure,",
+                    "quality: 100,",
+                    "source: 'library',",
+                    "width: 400,",
+                    "height: 400,",
+                    "destination: 'file'",
+                    "});*/"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#galleryButton"
+            },
+            "designerId": "be031706-ab20-4a9b-9200-6d95b22364d1"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLoadContactsButtonTap",
+                "implHandler": [
+                    "console.log('onLoadContactsButtonTap');",
+                    "",
+                    "var contactFields = ['*'];",
+                    "var contactFindOptions = {",
+                    "    filter: '',",
+                    "    multiple: true",
+                    "};",
+                    "navigator.contacts.find(contactFields, this.onContactSuccess, this.onContactError, contactFindOptions);"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#loadContactsButton"
+            },
+            "designerId": "031237ea-5697-4f99-b367-b7ec5462f6d1"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onTrashContactsButtonTap",
+                "implHandler": [
+                    "console.log('onTrashContactsButtonTap');",
+                    "",
+                    "var store = Ext.getStore('Contacts');",
+                    "store.removeAll();",
+                    "store.sync();"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#trashContactsButton"
+            },
+            "designerId": "f6618196-85eb-4d1d-9f53-476b92662496"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onContactSuccess",
+                "designer|params": [
+                    "contacts"
+                ],
+                "implHandler": [
+                    "console.log('onContactSuccess');",
+                    "",
+                    "Ext.Msg.alert('Success', 'The contacts has been successfully loaded.');",
+                    "",
+                    "var contactsStore = Ext.getStore('Contacts');",
+                    "",
+                    "for (var i = 0; i < contacts.length; i++) {",
+                    "    var deviceContact = contacts[i];",
+                    "",
+                    "    var contact = Ext.create('ArchitectApp.model.Contact', {",
+                    "        name: '',",
+                    "        surname: '',",
+                    "        address: '',",
+                    "        email: '',",
+                    "        phoneNumber: ''",
+                    "",
+                    "    });",
+                    "",
+                    "    if (deviceContact.name) {",
+                    "        if (deviceContact.name.givenName) {",
+                    "            contact.set('name', deviceContact.name.givenName);",
+                    "        }",
+                    "        if (deviceContact.name.familyName) {",
+                    "            contact.set('surname', deviceContact.name.familyName);",
+                    "        }",
+                    "    }",
+                    "",
+                    "    if (deviceContact.addresses) {",
+                    "        contact.set('address', deviceContact.addresses[0].value);",
+                    "    }",
+                    "",
+                    "    if (deviceContact.emails) {",
+                    "        contact.set('email', deviceContact.emails[0].value);",
+                    "    }",
+                    "",
+                    "    if (deviceContact.phoneNumbers) {",
+                    "        contact.set('phoneNumber', deviceContact.phoneNumbers[0].value);",
+                    "    }",
+                    "",
+                    "    contactsStore.add(contact);",
+                    "}",
+                    "",
+                    "contactsStore.sync();"
+                ]
+            },
+            "designerId": "89e57752-a89c-4a5e-8d1d-6bc1949e7980"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onContactError",
+                "designer|params": [
+                    "contactError"
+                ],
+                "implHandler": [
+                    "console.log('onContactError');",
+                    "",
+                    "Ext.Msg.alert('Error retrieving contacts', contactError.code);"
+                ]
+            },
+            "designerId": "6b4535ea-808b-48ab-9cf6-c2867b08d690"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onBarcodeButtonTap",
+                "implHandler": [
+                    "console.log('onScanBarcodeBUttonTap');",
+                    "",
+                    "cordova.plugins.barcodeScanner.scan(success, fail);",
+                    "",
+                    "function success(result) {",
+                    "    console.log('success');",
+                    "",
+                    "    if (!result.cancelled) {",
+                    "        var barcode = Ext.create('ArchitectApp.model.Barcode', {",
+                    "            code: result.text,",
+                    "            format: result.format",
+                    "        });",
+                    "        var barcodeStore = Ext.getStore('Barcodes');",
+                    "        barcodeStore.add(barcode);",
+                    "        barcodeStore.sync();",
+                    "    }",
+                    "}",
+                    "",
+                    "function fail(error) {",
+                    "    console.log('fail');",
+                    "    Ext.Msg.alert('Error', error);",
+                    "}"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#barcodeButton"
+            },
+            "designerId": "31fb150a-195a-4a1e-b1d8-f37dc942f6c0"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onSaveFileButtonTap",
+                "implHandler": [
+                    "console.log('onSaveFileButtonTap');",
+                    "",
+                    "var form = Ext.ComponentQuery.query('#fileForm')[0];",
+                    "var currentInfo = form.getRecord();",
+                    "var newValues = form.getValues();",
+                    "",
+                    "currentInfo.set('name', newValues.name);",
+                    "currentInfo.set('surname', newValues.surname);",
+                    "currentInfo.set('email', newValues.email);",
+                    "currentInfo.set('address', newValues.address);",
+                    "currentInfo.set('birthday', newValues.birthday);",
+                    "currentInfo.set('sex', newValues.sex);",
+                    "currentInfo.set('colour', newValues.colour);",
+                    "currentInfo.set('touch', newValues.touch);",
+                    "currentInfo.set('cordova', newValues.cordova);",
+                    "currentInfo.set('architect', newValues.architect);",
+                    "",
+                    "console.log(currentInfo.getData());",
+                    "",
+                    "var errors = currentInfo.validate();",
+                    "",
+                    "if (!errors.isValid()) {",
+                    "    errors.each(function(error) {",
+                    "        Ext.Msg.alert('Wait!', error.getMessage(), Ext.emptyFn);",
+                    "    });",
+                    "    currentInfo.reject();",
+                    "    return;",
+                    "}",
+                    "",
+                    "var personalInfoStore = Ext.getStore('PersonalInfos');",
+                    "",
+                    "personalInfoStore.insert(0,currentInfo);",
+                    "personalInfoStore.sync();",
+                    "",
+                    "Ext.Msg.alert('Attention', 'The Personal Info\\'s store has been saved.');"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#saveFileButton"
+            },
+            "designerId": "153f7665-d084-451b-9752-e673950867aa"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onCancelFileButtonTap",
+                "implHandler": [
+                    "console.log('onCancelFileButtonTap');",
+                    "",
+                    "var form = Ext.ComponentQuery.query('#fileForm')[0];",
+                    "form.reset();"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#cancelFileButton"
+            },
+            "designerId": "96195026-f969-4a82-adcf-e1a7bc7c4337"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLoadFileButtonTap",
+                "implHandler": [
+                    "console.log('onLoadFileButtonTap');",
+                    "",
+                    "var info = Ext.getStore('PersonalInfos').getAt(0);",
+                    "var form = Ext.ComponentQuery.query('#fileForm')[0];",
+                    "form.setRecord(info);"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#loadFileButton"
+            },
+            "designerId": "29d8ac34-a78f-4b3f-a0fa-ed16dfeb337d"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onDeleteFileButtonTap",
+                "implHandler": [
+                    "console.log('onDeleteFileButtonTap');",
+                    "",
+                    "Ext.getStore('PersonalInfos').removeAll();",
+                    "this.onCancelFileButtonTap();",
+                    "Ext.Msg.alert('Attention', 'The Personal Info\\'s store has been deleted.');"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#deleteFileButton"
+            },
+            "designerId": "eccd90c7-0791-43cd-b923-13ddecb04aae"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onBackupFileButtonTap",
+                "implHandler": [
+                    "console.log('onBackupFileButtonTap');",
+                    "",
+                    "var store = Ext.getStore('PersonalInfos');",
+                    "var record = store.getAt(0).getData();",
+                    "var string = Ext.JSON.encode(record);",
+                    "",
+                    "window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);",
+                    "",
+                    "function gotFS(fileSystem) {",
+                    "    console.log('gotFs');",
+                    "",
+                    "    fileSystem.root.getDirectory('ArchitectApp', {create: true, exclusive: false}, gotDirectoryEntry, fail);",
+                    "}",
+                    "",
+                    "function gotDirectoryEntry(directoryEntry) {",
+                    "    console.log('gotDirectoryEntry');",
+                    "",
+                    "    directoryEntry.getFile('backupPersonalInfo.txt', {create: true, exclusive: false}, gotFileEntry, fail);",
+                    "}",
+                    "",
+                    "function gotFileEntry(fileEntry) {",
+                    "    console.log('gotFileEntry');",
+                    "    fileEntry.createWriter(gotFileWriter, fail);",
+                    "}",
+                    "",
+                    "function gotFileWriter(writer) {",
+                    "    console.log('gotFileWriter');",
+                    "    writer.onwrite = function(evt) {",
+                    "        console.log('onWrite');",
+                    "        Ext.Msg.alert('Success', 'The Personal Info\\'s store has been backed up.');",
+                    "    };",
+                    "    writer.write(string);",
+                    "}",
+                    "",
+                    "function fail(error) {",
+                    "    console.log(error.code);",
+                    "    Ext.Msg.alert('Error', error.code);",
+                    "}"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#backupFileButton"
+            },
+            "designerId": "d600f2ef-1db2-47f2-ae26-81f9a0eb5e08"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onRestoreFileButtonTap",
+                "implHandler": [
+                    "console.log('onRestoreFileButtonTap');",
+                    "",
+                    "var me = this;",
+                    "",
+                    "window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);",
+                    "",
+                    "function gotFS(fileSystem) {",
+                    "    console.log('gotFS');",
+                    "",
+                    "    fileSystem.root.getDirectory('ArchitectApp', null, gotDirectoryEntry, fail);",
+                    "}",
+                    "",
+                    "function gotDirectoryEntry(directoryEntry) {",
+                    "    console.log('gotDirectoryEntry');",
+                    "",
+                    "    directoryEntry.getFile('backupPersonalInfo.txt', null, gotFileEntry, fail);",
+                    "}",
+                    "",
+                    "function gotFileEntry(fileEntry) {",
+                    "    console.log('gotFileEntry');",
+                    "",
+                    "    fileEntry.file(gotFile, fail);",
+                    "}",
+                    "",
+                    "function gotFile(file) {",
+                    "    console.log('gotFile');",
+                    "",
+                    "    readAsText(file);",
+                    "}",
+                    "",
+                    "function readAsText(file) {",
+                    "    console.log('readAsText');",
+                    "",
+                    "    var reader = new FileReader();",
+                    "",
+                    "    reader.onload = function(evt) {",
+                    "        console.log('onLoad');",
+                    "        var personalInfoStore = Ext.getStore('PersonalInfos');",
+                    "        var object = Ext.JSON.decode(evt.target.result);",
+                    "        personalInfoStore.insert(0,object);",
+                    "        personalInfoStore.sync();",
+                    "        me.onLoadFileButtonTap();",
+                    "    };",
+                    "",
+                    "    reader.readAsText(file);",
+                    "}",
+                    "",
+                    "function fail(error) {",
+                    "    console.log(error.code);",
+                    "    Ext.Msg.alert('Error', error.code);",
+                    "}"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#restoreFileButton"
+            },
+            "designerId": "55df09dc-60e0-4861-a438-07f10dcde227"
+        }
+    ]
+}

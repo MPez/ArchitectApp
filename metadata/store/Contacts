@@ -1,0 +1,78 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "data": null,
+        "model": "Contact",
+        "storeId": "Contacts",
+        "designer|userClassName": "Contacts",
+        "requires": [
+            "Ext.data.proxy.LocalStorage"
+        ]
+    },
+    "designerId": "1d069a6a-3def-4dc4-af4a-e48a1f043c6e",
+    "cn": [
+        {
+            "type": "Ext.util.Sorter",
+            "reference": {
+                "name": "sorters",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "property": "surname"
+            },
+            "designerId": "2d929eab-9f6a-4647-ad28-8f5d4ceb5bb3"
+        },
+        {
+            "type": "Ext.util.Grouper",
+            "reference": {
+                "name": "grouper",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "property": null,
+                "sortProperty": "surname"
+            },
+            "designerId": "b3f22c99-f830-459c-b640-081ce1f03e28",
+            "cn": [
+                {
+                    "type": "fixedfunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "groupFn",
+                        "designer|params": [
+                            "item"
+                        ],
+                        "implHandler": [
+                            "if (item && item.data.surname) {",
+                            "    return item.data.surname.substr(0,1).toUpperCase();",
+                            "} else {",
+                            "    return '';",
+                            "}"
+                        ]
+                    },
+                    "designerId": "ac0aa992-17a0-4855-8058-f37bd6b6cb4e"
+                }
+            ]
+        },
+        {
+            "type": "Ext.data.proxy.LocalStorage",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "designerId": "9ca47561-7d16-4322-8585-eba88054f20f"
+        }
+    ]
+}

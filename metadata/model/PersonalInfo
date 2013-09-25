@@ -1,0 +1,185 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "PersonalInfo"
+    },
+    "designerId": "23575e37-6659-4bda-83d9-01d5ecf873e7",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "name",
+                "type": "string"
+            },
+            "designerId": "bc0b562c-8b22-4ba3-b73a-4657ea558abd"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "surname",
+                "type": "string"
+            },
+            "designerId": "0da9700e-ed4d-4468-ab4d-8afb6e374ee2"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "email",
+                "type": "string"
+            },
+            "designerId": "0e36ed43-8300-4540-a092-44919b685002"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "dateFormat": null,
+                "name": "address",
+                "type": "string"
+            },
+            "designerId": "b63520b3-5a72-49c5-8f08-9d26faca00c4"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "dateFormat": "c",
+                "name": "birthday",
+                "type": "date"
+            },
+            "designerId": "499d7169-9784-4120-a399-cbd092439afd"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "sex",
+                "type": "string"
+            },
+            "designerId": "21bcfe5c-9c0c-4ba5-953f-4c8e85b7349f"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "colour",
+                "type": "string"
+            },
+            "designerId": "5a5b4714-a1d7-4fe2-8f27-9932d722453b"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "touch",
+                "type": "string"
+            },
+            "designerId": "f4cdf40a-872b-4cca-8fdf-20f5b8066c33"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "cordova",
+                "type": "string"
+            },
+            "designerId": "a4a955fc-75ae-499a-9ebe-d27ecc6975f6"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "architect",
+                "type": "string"
+            },
+            "designerId": "c7f4f9b7-0d7d-4db0-8c54-824d04c7c6ba"
+        },
+        {
+            "type": "presencevalidation",
+            "reference": {
+                "name": "validations",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "field": "name"
+            },
+            "designerId": "4b065da9-afb8-4ef8-8f8c-0390fae3f1dd"
+        },
+        {
+            "type": "presencevalidation",
+            "reference": {
+                "name": "validations",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "field": "surname"
+            },
+            "designerId": "9ee58e22-aee7-4356-b8b1-5ee8429e05aa"
+        },
+        {
+            "type": "inclusionvalidation",
+            "reference": {
+                "name": "validations",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "field": "sex",
+                "list": [
+                    "['male', 'female']"
+                ]
+            },
+            "designerId": "cb6fd53e-f597-44c9-95bd-6b1cf50fa58b"
+        }
+    ]
+}

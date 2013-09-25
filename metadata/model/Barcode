@@ -1,0 +1,40 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Barcode"
+    },
+    "designerId": "35225c05-1a5a-42e6-b80c-c6729cc7bef3",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "code",
+                "type": "string"
+            },
+            "designerId": "fb00cc67-b85a-4a85-88e7-d1838ea345f3"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "format",
+                "type": "string"
+            },
+            "designerId": "e3cd9d48-67c7-4542-973b-cfe1676cd31e"
+        }
+    ]
+}

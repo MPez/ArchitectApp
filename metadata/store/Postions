@@ -1,0 +1,28 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "model": "Position",
+        "storeId": "Positions",
+        "designer|userClassName": "Postions",
+        "requires": [
+            "Ext.data.proxy.Sql"
+        ]
+    },
+    "designerId": "b57f949b-34c4-4e2a-9b7f-25ec6f5dad1b",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Sql",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "designerId": "74f91267-f3c7-4c46-9e65-16d73daa7f7c"
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "type": "Ext.data.Store",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "model": "Barcode",
+        "storeId": "Barcodes",
+        "designer|userClassName": "Barcodes",
+        "requires": [
+            "Ext.data.proxy.Sql"
+        ]
+    },
+    "designerId": "252dfb6b-5d1d-47a6-8dbb-bc401e6c8257",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Sql",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "designerId": "9a201a2a-7482-4060-9e99-870a21a97a63"
+        }
+    ]
+}
