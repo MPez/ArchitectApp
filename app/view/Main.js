@@ -97,6 +97,7 @@ Ext.define('ArchitectApp.view.Main', {
                     {
                         xtype: 'list',
                         flex: 1,
+                        height: '100%',
                         itemId: 'sensorList',
                         ui: 'round',
                         itemTpl: [
@@ -108,6 +109,7 @@ Ext.define('ArchitectApp.view.Main', {
                     {
                         xtype: 'container',
                         flex: 4,
+                        height: '100%',
                         itemId: 'sensorView',
                         layout: {
                             type: 'card'
@@ -604,6 +606,7 @@ Ext.define('ArchitectApp.view.Main', {
                 xtype: 'container',
                 title: 'Location',
                 iconCls: 'maps',
+                height: '100%',
                 itemId: 'locationView',
                 layout: {
                     animation: 'flip',

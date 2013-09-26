@@ -6,6 +6,8 @@
     },
     "codeClass": null,
     "userConfig": {
+        "fullscreen": null,
+        "height": null,
         "itemId": "mainView",
         "designer|userClassName": "Main",
         "requires": [
@@ -36,6 +38,7 @@
             "userConfig": {
                 "title": "Home",
                 "iconCls": "home",
+                "height": null,
                 "itemId": "homeView",
                 "layout": "hbox"
             },
@@ -162,6 +165,7 @@
                     "codeClass": null,
                     "userConfig": {
                         "layout|flex": 1,
+                        "height": "100%",
                         "itemId": "sensorList",
                         "ui": "round",
                         "store": "Sensors",
@@ -195,6 +199,7 @@
                     "codeClass": null,
                     "userConfig": {
                         "layout|flex": 4,
+                        "height": "100%",
                         "itemId": "sensorView",
                         "layout": "card"
                     },
@@ -1282,6 +1287,7 @@
                 "title": "Location",
                 "container|animation": "flip",
                 "iconCls": "maps",
+                "height": "100%",
                 "itemId": "locationView",
                 "layout": "card"
             },
