@@ -67,6 +67,15 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
             },
             "button#restoreFileButton": {
                 tap: 'onRestoreFileButtonTap'
+            },
+            "button#audioButton": {
+                tap: 'onAudioButtonTap'
+            },
+            "button#videoButton": {
+                tap: 'onVideoButtonTap'
+            },
+            "button#imageButton": {
+                tap: 'onImageButtonTap'
             }
         }
     },
@@ -423,6 +432,24 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         }
     },
 
+    onAudioButtonTap: function(button, e, eOpts) {
+        console.log('onAudioButtonTap');
+
+        navigator.device.capture.captureAudio(this.onCaptureMediaSuccess, this.onCaptureError);
+    },
+
+    onVideoButtonTap: function(button, e, eOpts) {
+        console.log('onVideoButtonTap');
+
+        navigator.device.capture.captureVideo(this.onCaptureMediaSuccess, this.onCaptureError);
+    },
+
+    onImageButtonTap: function(button, e, eOpts) {
+        console.log('onImageButtonTap');
+
+        navigator.device.capture.captureImage(this.onCaptureMediaSuccess, this.onCaptureError);
+    },
+
     onCameraCaptureSuccess: function(image) {
         console.log('onCameraCaptureSuccess');
 
@@ -500,6 +527,28 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         console.log('onContactError');
 
         Ext.Msg.alert('Error retrieving contacts', contactError.code);
+    },
+
+    onCaptureMediaSuccess: function(media) {
+        console.log('onCaptureMediaSuccess');
+
+        var now = new Date();
+        var newMedia = Ext.create('ArchitectApp.model.AudioVideo', {
+            name: mediaFiles[0].name,
+            path: mediaFiles[0].fullPath,
+            type: mediaFiles[0].type,
+            timestamp: now
+        });
+
+        var mediaStore = Ext.getStore('AudioVideos');
+        mediaStore.add(newMedia);
+        mediaStore.sync();
+    },
+
+    onCaptureError: function(error) {
+        console.log('onCaptureError');
+
+        Ext.Msg.alert('Error', error.code);
     }
 
 });

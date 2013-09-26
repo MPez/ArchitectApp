@@ -142,6 +142,22 @@
                 "app/store/PersonalInfos.js"
             ],
             "className": "PersonalInfos"
+        },
+        "e298e1f1-e7a3-4a9a-b612-69b141fed592": {
+            "paths": [
+                "metadata/store/AudioVideos",
+                "app/store/override/AudioVideos.js",
+                "app/store/AudioVideos.js"
+            ],
+            "className": "AudioVideos"
+        },
+        "f8ed47ff-7233-417e-b946-1daa6d8d22c9": {
+            "paths": [
+                "metadata/model/AudioVideo",
+                "app/model/override/AudioVideo.js",
+                "app/model/AudioVideo.js"
+            ],
+            "className": "AudioVideo"
         }
     },
     "viewOrderMap": {
@@ -154,7 +170,8 @@
             "1d069a6a-3def-4dc4-af4a-e48a1f043c6e",
             "252dfb6b-5d1d-47a6-8dbb-bc401e6c8257",
             "9d74bdb2-1413-4f25-85b7-86f0967df19f",
-            "2559bb7e-64fc-4beb-8b68-053e7c37a849"
+            "2559bb7e-64fc-4beb-8b68-053e7c37a849",
+            "e298e1f1-e7a3-4a9a-b612-69b141fed592"
         ],
         "controller": [
             "b872ceb2-d6c8-4a63-a1ca-72b7ddfd75ef"
@@ -165,7 +182,8 @@
             "ff17066c-2a3e-4e95-b831-cbe24617a356",
             "35225c05-1a5a-42e6-b80c-c6729cc7bef3",
             "6d56a246-3ee6-488c-8235-1020bb37dff1",
-            "23575e37-6659-4bda-83d9-01d5ecf873e7"
+            "23575e37-6659-4bda-83d9-01d5ecf873e7",
+            "f8ed47ff-7233-417e-b946-1daa6d8d22c9"
         ],
         "resource": [
             "f4b975e2-0737-4227-bae1-af9bd7d98b1b",

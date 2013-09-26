@@ -148,7 +148,7 @@ Ext.define('ArchitectApp.view.Main', {
                                     },
                                     {
                                         xtype: 'dataview',
-                                        flex: 5,
+                                        flex: 6,
                                         itemId: 'pictureDataView',
                                         emptyText: 'No images found.',
                                         itemTpl: [
@@ -160,7 +160,50 @@ Ext.define('ArchitectApp.view.Main', {
                             },
                             {
                                 xtype: 'panel',
-                                itemId: 'media'
+                                itemId: 'media',
+                                layout: {
+                                    type: 'vbox'
+                                },
+                                items: [
+                                    {
+                                        xtype: 'panel',
+                                        flex: 1,
+                                        layout: {
+                                            align: 'center',
+                                            pack: 'center',
+                                            type: 'hbox'
+                                        },
+                                        items: [
+                                            {
+                                                xtype: 'button',
+                                                itemId: 'audioButton',
+                                                margin: 10,
+                                                text: 'Capture Audio'
+                                            },
+                                            {
+                                                xtype: 'button',
+                                                itemId: 'videoButton',
+                                                margin: 10,
+                                                text: 'Capture Video'
+                                            },
+                                            {
+                                                xtype: 'button',
+                                                itemId: 'imageButton',
+                                                margin: 10,
+                                                text: 'Capture Image'
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        xtype: 'list',
+                                        flex: 6,
+                                        itemId: 'mediaList',
+                                        itemTpl: [
+                                            '<div>Name: {name}, Type: {type}, Timestamp: {timestamp}</div>'
+                                        ],
+                                        store: 'AudioVideos'
+                                    }
+                                ]
                             },
                             {
                                 xtype: 'formpanel',
@@ -240,6 +283,7 @@ Ext.define('ArchitectApp.view.Main', {
                                                 xtype: 'selectfield',
                                                 label: 'Colour',
                                                 name: 'colour',
+                                                placeHolder: 'Your favourite colour',
                                                 autoSelect: false,
                                                 options: [
                                                     {
@@ -289,6 +333,7 @@ Ext.define('ArchitectApp.view.Main', {
                                     {
                                         xtype: 'panel',
                                         layout: {
+                                            align: 'center',
                                             pack: 'end',
                                             type: 'hbox'
                                         },

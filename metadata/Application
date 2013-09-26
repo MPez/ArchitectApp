@@ -12,7 +12,8 @@
             "Contact",
             "Barcode",
             "Picture",
-            "PersonalInfo"
+            "PersonalInfo",
+            "AudioVideo"
         ],
         "stores": [
             "Postions",
@@ -20,7 +21,8 @@
             "Contacts",
             "Barcodes",
             "Pictures",
-            "PersonalInfos"
+            "PersonalInfos",
+            "AudioVideos"
         ],
         "views": [
             "Main"

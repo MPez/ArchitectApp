@@ -718,6 +718,116 @@
                 "designer|controlQuery": "button#restoreFileButton"
             },
             "designerId": "55df09dc-60e0-4861-a438-07f10dcde227"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAudioButtonTap",
+                "implHandler": [
+                    "console.log('onAudioButtonTap');",
+                    "",
+                    "navigator.device.capture.captureAudio(this.onCaptureMediaSuccess, this.onCaptureError);"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#audioButton"
+            },
+            "designerId": "793ff4e7-9097-48e0-b602-578c443a1dc0"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onVideoButtonTap",
+                "implHandler": [
+                    "console.log('onVideoButtonTap');",
+                    "",
+                    "navigator.device.capture.captureVideo(this.onCaptureMediaSuccess, this.onCaptureError);"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#videoButton"
+            },
+            "designerId": "affb0d33-28a9-4c77-bfdb-f547d1887728"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onImageButtonTap",
+                "implHandler": [
+                    "console.log('onImageButtonTap');",
+                    "",
+                    "navigator.device.capture.captureImage(this.onCaptureMediaSuccess, this.onCaptureError);"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#imageButton"
+            },
+            "designerId": "e86d6b43-e403-4b40-a1a7-9ec26e3dfe50"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onCaptureMediaSuccess",
+                "designer|params": [
+                    "media"
+                ],
+                "implHandler": [
+                    "console.log('onCaptureMediaSuccess');",
+                    "",
+                    "var now = new Date();",
+                    "var newMedia = Ext.create('ArchitectApp.model.AudioVideo', {",
+                    "    name: mediaFiles[0].name,",
+                    "    path: mediaFiles[0].fullPath,",
+                    "    type: mediaFiles[0].type,",
+                    "    timestamp: now",
+                    "});",
+                    "",
+                    "var mediaStore = Ext.getStore('AudioVideos');",
+                    "mediaStore.add(newMedia);",
+                    "mediaStore.sync();"
+                ]
+            },
+            "designerId": "ac006535-2c8a-4625-93cf-4590b5b45d79"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onCaptureError",
+                "designer|params": [
+                    "error"
+                ],
+                "implHandler": [
+                    "console.log('onCaptureError');",
+                    "",
+                    "Ext.Msg.alert('Error', error.code);"
+                ]
+            },
+            "designerId": "b1792b2b-163e-4e18-89fc-1e1b14d38009"
         }
     ]
 }

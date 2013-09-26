@@ -276,7 +276,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "layout|flex": 5,
+                                        "layout|flex": 6,
                                         "itemId": "pictureDataView",
                                         "emptyText": "No images found.",
                                         "store": "Pictures"
@@ -310,9 +310,103 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "itemId": "media"
+                                "itemId": "media",
+                                "layout": "vbox"
                             },
-                            "designerId": "86dc612d-04fa-4c51-a6a6-61787505d58d"
+                            "designerId": "86dc612d-04fa-4c51-a6a6-61787505d58d",
+                            "cn": [
+                                {
+                                    "type": "Ext.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1,
+                                        "container|align": "center",
+                                        "container|pack": "center",
+                                        "layout": "hbox"
+                                    },
+                                    "designerId": "dfa5a428-aeb2-4e21-a810-0a3f09bd9645",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|flex": null,
+                                                "itemId": "audioButton",
+                                                "margin": 10,
+                                                "text": "Capture Audio"
+                                            },
+                                            "designerId": "d6156313-9d04-4e94-845f-6a40b8c740e7"
+                                        },
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "itemId": "videoButton",
+                                                "margin": 10,
+                                                "text": "Capture Video"
+                                            },
+                                            "designerId": "ae8b045a-5a02-40c9-b9a0-ac7a49d9ee8f"
+                                        },
+                                        {
+                                            "type": "Ext.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "itemId": "imageButton",
+                                                "margin": 10,
+                                                "text": "Capture Image"
+                                            },
+                                            "designerId": "3b474399-4f78-4375-9dfb-6d3e09e0b701"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.dataview.List",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 6,
+                                        "itemId": "mediaList",
+                                        "store": "AudioVideos"
+                                    },
+                                    "designerId": "78b5f087-91c4-4731-be21-378bde3438d8",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.XTemplate",
+                                            "reference": {
+                                                "name": "itemTpl",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "implHandler": [
+                                                    "<div>Name: {name}, Type: {type}, Timestamp: {timestamp}</div>"
+                                                ],
+                                                "designer|displayName": "itemTpl"
+                                            },
+                                            "designerId": "61c64395-24de-40fe-8f21-5aa635e1850d"
+                                        }
+                                    ]
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.form.Panel",
@@ -514,6 +608,7 @@
                                             "userConfig": {
                                                 "label": "Colour",
                                                 "name": "colour",
+                                                "placeHolder": "Your favourite colour",
                                                 "autoSelect": false,
                                                 "displayField": null,
                                                 "options": [
@@ -584,7 +679,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "container|align": null,
+                                        "container|align": "center",
                                         "container|pack": "end",
                                         "margin": null,
                                         "layout": "hbox"

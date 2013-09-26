@@ -25,7 +25,8 @@ Ext.application({
         'Contact',
         'Barcode',
         'Picture',
-        'PersonalInfo'
+        'PersonalInfo',
+        'AudioVideo'
     ],
     stores: [
         'Postions',
@@ -33,7 +34,8 @@ Ext.application({
         'Contacts',
         'Barcodes',
         'Pictures',
-        'PersonalInfos'
+        'PersonalInfos',
+        'AudioVideos'
     ],
     views: [
         'Main'
