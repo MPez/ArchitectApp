@@ -21,12 +21,14 @@ Ext.Loader.addClassPathMappings({
 });
 Ext.ClassManager.addNameAlternateMappings({
   "ArchitectApp.controller.ArchitectApp": [],
+  "ArchitectApp.model.AudioVideo": [],
   "ArchitectApp.model.Barcode": [],
   "ArchitectApp.model.Contact": [],
   "ArchitectApp.model.PersonalInfo": [],
   "ArchitectApp.model.Picture": [],
   "ArchitectApp.model.Position": [],
   "ArchitectApp.model.Sensor": [],
+  "ArchitectApp.store.AudioVideos": [],
   "ArchitectApp.store.Barcodes": [],
   "ArchitectApp.store.Contacts": [],
   "ArchitectApp.store.PersonalInfos": [],
@@ -658,12 +660,14 @@ Ext.ClassManager.addNameAlternateMappings({
 });
 Ext.ClassManager.addNameAliasMappings({
   "ArchitectApp.controller.ArchitectApp": [],
+  "ArchitectApp.model.AudioVideo": [],
   "ArchitectApp.model.Barcode": [],
   "ArchitectApp.model.Contact": [],
   "ArchitectApp.model.PersonalInfo": [],
   "ArchitectApp.model.Picture": [],
   "ArchitectApp.model.Position": [],
   "ArchitectApp.model.Sensor": [],
+  "ArchitectApp.store.AudioVideos": [],
   "ArchitectApp.store.Barcodes": [],
   "ArchitectApp.store.Contacts": [],
   "ArchitectApp.store.PersonalInfos": [],

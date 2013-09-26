@@ -76,6 +76,12 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
             },
             "button#imageButton": {
                 tap: 'onImageButtonTap'
+            },
+            "list#mediaList": {
+                disclose: 'onMediaListDisclose'
+            },
+            "button#backMediaButton": {
+                tap: 'onBackMediaButtonTap'
             }
         }
     },
@@ -132,7 +138,8 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
     onSensorListItemTap: function(dataview, index, target, record, e, eOpts) {
         console.log('onSensorListItemTap');
 
-        var name = record.get('name').toLowerCase();
+        var title = record.get('name');
+        var name = title.toLowerCase();
 
         if(name == 'geolocation') {
             Ext.ComponentQuery.query('container#mainView')[0].setActiveItem('#locationView');
@@ -140,9 +147,11 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
             if(name == 'contacts') {
                 Ext.ComponentQuery.query('button#loadContactsButton')[0].setHidden(false);
                 Ext.ComponentQuery.query('button#trashContactsButton')[0].setHidden(false);
+                Ext.ComponentQuery.query('button#backMediaButton')[0].setHidden(true);
             } else {
                 Ext.ComponentQuery.query('button#loadContactsButton')[0].setHidden(true);
                 Ext.ComponentQuery.query('button#trashContactsButton')[0].setHidden(true);
+                Ext.ComponentQuery.query('button#backMediaButton')[0].setHidden(true);
 
                 if(name == 'file') {
                     console.log('onFileItem');
@@ -176,6 +185,7 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
                 }
             }
 
+            Ext.ComponentQuery.query('titlebar#homeTitleBar')[0].setTitle(title);
             Ext.ComponentQuery.query('container#sensorView')[0].setActiveItem('#' + name);
         }
     },
@@ -450,6 +460,38 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         navigator.device.capture.captureImage(this.onCaptureMediaSuccess, this.onCaptureError);
     },
 
+    onMediaListDisclose: function(list, record, target, index, e, eOpts) {
+        console.log('onMediaListDisclose');
+
+        var media = Ext.ComponentQuery.query('panel#media')[0];
+
+        if (record.get('type').search(/^audio/) != -1) {
+            media.getComponent('audioPanel').getComponent('audio').setUrl(record.get('path'));
+            media.setActiveItem('#audioPanel');
+            Ext.ComponentQuery.query('titlebar#homeTitleBar')[0].setTitle('Audio');
+        }
+        else if(record.get('type').search(/^video/) != -1){
+            media.getComponent('videoPanel').getComponent('video').setUrl(record.get('path'));
+            media.setActiveItem('#videoPanel');
+            Ext.ComponentQuery.query('titlebar#homeTitleBar')[0].setTitle('Video');
+        }
+        else {
+            media.getComponent('imagePanel').getComponent('image').setSrc(record.get('path'));
+            media.setActiveItem('#imagePanel');
+            Ext.ComponentQuery.query('titlebar#homeTitleBar')[0].setTitle('Image');
+        }
+
+        Ext.ComponentQuery.query('button#backMediaButton')[0].setHidden(false);
+    },
+
+    onBackMediaButtonTap: function(button, e, eOpts) {
+        console.log('onBackMediaButtonTap');
+
+        Ext.ComponentQuery.query('button#backMediaButton')[0].setHidden(true);
+
+        Ext.ComponentQuery.query('panel#media')[0].setActiveItem('#mediaPanel');
+    },
+
     onCameraCaptureSuccess: function(image) {
         console.log('onCameraCaptureSuccess');
 
@@ -475,6 +517,7 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         Ext.getStore('Pictures').load();
         Ext.getStore('Contacts').load();
         Ext.getStore('PersonalInfos').load();
+        Ext.getStore('AudioVideos').load();
     },
 
     onContactSuccess: function(contacts) {
@@ -529,7 +572,7 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         Ext.Msg.alert('Error retrieving contacts', contactError.code);
     },
 
-    onCaptureMediaSuccess: function(media) {
+    onCaptureMediaSuccess: function(mediaFiles) {
         console.log('onCaptureMediaSuccess');
 
         var now = new Date();

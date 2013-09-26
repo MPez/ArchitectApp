@@ -25,7 +25,10 @@ Ext.define('ArchitectApp.view.Main', {
         'Ext.field.DatePicker',
         'Ext.field.Radio',
         'Ext.Map',
-        'Ext.form.FieldSet'
+        'Ext.form.FieldSet',
+        'Ext.Audio',
+        'Ext.Video',
+        'Ext.Img'
     ],
 
     config: {
@@ -43,6 +46,7 @@ Ext.define('ArchitectApp.view.Main', {
                     {
                         xtype: 'titlebar',
                         docked: 'top',
+                        itemId: 'homeTitleBar',
                         title: 'Home',
                         items: [
                             {
@@ -58,6 +62,13 @@ Ext.define('ArchitectApp.view.Main', {
                                 hidden: true,
                                 itemId: 'trashContactsButton',
                                 iconCls: 'trash'
+                            },
+                            {
+                                xtype: 'button',
+                                hidden: true,
+                                itemId: 'backMediaButton',
+                                ui: 'back',
+                                iconCls: 'arrow_left'
                             }
                         ]
                     },
@@ -162,46 +173,94 @@ Ext.define('ArchitectApp.view.Main', {
                                 xtype: 'panel',
                                 itemId: 'media',
                                 layout: {
-                                    type: 'vbox'
+                                    type: 'card'
                                 },
                                 items: [
                                     {
                                         xtype: 'panel',
-                                        flex: 1,
+                                        itemId: 'mediaPanel',
                                         layout: {
-                                            align: 'center',
-                                            pack: 'center',
-                                            type: 'hbox'
+                                            type: 'vbox'
                                         },
                                         items: [
                                             {
-                                                xtype: 'button',
-                                                itemId: 'audioButton',
-                                                margin: 10,
-                                                text: 'Capture Audio'
+                                                xtype: 'panel',
+                                                flex: 1,
+                                                layout: {
+                                                    align: 'center',
+                                                    pack: 'center',
+                                                    type: 'hbox'
+                                                },
+                                                items: [
+                                                    {
+                                                        xtype: 'button',
+                                                        itemId: 'audioButton',
+                                                        margin: 10,
+                                                        text: 'Capture Audio'
+                                                    },
+                                                    {
+                                                        xtype: 'button',
+                                                        itemId: 'videoButton',
+                                                        margin: 10,
+                                                        text: 'Capture Video'
+                                                    },
+                                                    {
+                                                        xtype: 'button',
+                                                        itemId: 'imageButton',
+                                                        margin: 10,
+                                                        text: 'Capture Image'
+                                                    }
+                                                ]
                                             },
                                             {
-                                                xtype: 'button',
-                                                itemId: 'videoButton',
-                                                margin: 10,
-                                                text: 'Capture Video'
-                                            },
-                                            {
-                                                xtype: 'button',
-                                                itemId: 'imageButton',
-                                                margin: 10,
-                                                text: 'Capture Image'
+                                                xtype: 'list',
+                                                flex: 6,
+                                                itemId: 'mediaList',
+                                                itemTpl: [
+                                                    '<div>Name: {name}, Type: {type}, Timestamp: {timestamp}</div>'
+                                                ],
+                                                store: 'AudioVideos',
+                                                onItemDisclosure: true
                                             }
                                         ]
                                     },
                                     {
-                                        xtype: 'list',
-                                        flex: 6,
-                                        itemId: 'mediaList',
-                                        itemTpl: [
-                                            '<div>Name: {name}, Type: {type}, Timestamp: {timestamp}</div>'
-                                        ],
-                                        store: 'AudioVideos'
+                                        xtype: 'panel',
+                                        itemId: 'audioPanel',
+                                        items: [
+                                            {
+                                                xtype: 'audio',
+                                                centered: true,
+                                                itemId: 'audio',
+                                                width: '100%'
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        xtype: 'panel',
+                                        itemId: 'videoPanel',
+                                        items: [
+                                            {
+                                                xtype: 'video',
+                                                centered: true,
+                                                height: 320,
+                                                itemId: 'video',
+                                                width: 640
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        xtype: 'panel',
+                                        itemId: 'imagePanel',
+                                        items: [
+                                            {
+                                                xtype: 'image',
+                                                centered: true,
+                                                height: 400,
+                                                itemId: 'image',
+                                                width: 400
+                                            }
+                                        ]
                                     }
                                 ]
                             },

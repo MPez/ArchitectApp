@@ -8,7 +8,10 @@
     "userConfig": {
         "model": "AudioVideo",
         "storeId": "AudioVideos",
-        "designer|userClassName": "AudioVideos"
+        "designer|userClassName": "AudioVideos",
+        "requires": [
+            "Ext.data.proxy.LocalStorage"
+        ]
     },
     "designerId": "e298e1f1-e7a3-4a9a-b612-69b141fed592",
     "cn": [
@@ -23,6 +26,15 @@
                 "property": "timestamp"
             },
             "designerId": "7daadc41-7dd9-461f-b962-3612b6c9c83c"
+        },
+        {
+            "type": "Ext.data.proxy.LocalStorage",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "designerId": "2fffab7d-fecd-4eb1-a9f7-1d62edcf9440"
         }
     ]
 }

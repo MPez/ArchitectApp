@@ -117,7 +117,8 @@
                 "implHandler": [
                     "console.log('onSensorListItemTap');",
                     "",
-                    "var name = record.get('name').toLowerCase();",
+                    "var title = record.get('name');",
+                    "var name = title.toLowerCase();",
                     "",
                     "if(name == 'geolocation') {",
                     "    Ext.ComponentQuery.query('container#mainView')[0].setActiveItem('#locationView');",
@@ -125,9 +126,11 @@
                     "    if(name == 'contacts') {",
                     "        Ext.ComponentQuery.query('button#loadContactsButton')[0].setHidden(false);",
                     "        Ext.ComponentQuery.query('button#trashContactsButton')[0].setHidden(false);",
+                    "        Ext.ComponentQuery.query('button#backMediaButton')[0].setHidden(true);",
                     "    } else {",
                     "        Ext.ComponentQuery.query('button#loadContactsButton')[0].setHidden(true);",
                     "        Ext.ComponentQuery.query('button#trashContactsButton')[0].setHidden(true);",
+                    "        Ext.ComponentQuery.query('button#backMediaButton')[0].setHidden(true);",
                     "",
                     "        if(name == 'file') {",
                     "            console.log('onFileItem');",
@@ -160,7 +163,8 @@
                     "            form.setRecord(newInfo);",
                     "        }",
                     "    }",
-                    "",
+                    "\t",
+                    "    Ext.ComponentQuery.query('titlebar#homeTitleBar')[0].setTitle(title);",
                     "    Ext.ComponentQuery.query('container#sensorView')[0].setActiveItem('#' + name);",
                     "}"
                 ],
@@ -268,7 +272,8 @@
                     "Ext.getStore('Barcodes').load();",
                     "Ext.getStore('Pictures').load();",
                     "Ext.getStore('Contacts').load();",
-                    "Ext.getStore('PersonalInfos').load();"
+                    "Ext.getStore('PersonalInfos').load();",
+                    "Ext.getStore('AudioVideos').load();"
                 ]
             },
             "designerId": "2b07826f-fa9e-46bd-a32f-59e3e5a17a04"
@@ -789,7 +794,7 @@
             "userConfig": {
                 "fn": "onCaptureMediaSuccess",
                 "designer|params": [
-                    "media"
+                    "mediaFiles"
                 ],
                 "implHandler": [
                     "console.log('onCaptureMediaSuccess');",
@@ -828,6 +833,66 @@
                 ]
             },
             "designerId": "b1792b2b-163e-4e18-89fc-1e1b14d38009"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onMediaListDisclose",
+                "implHandler": [
+                    "console.log('onMediaListDisclose');",
+                    "",
+                    "var media = Ext.ComponentQuery.query('panel#media')[0];",
+                    "",
+                    "if (record.get('type').search(/^audio/) != -1) {",
+                    "    media.getComponent('audioPanel').getComponent('audio').setUrl(record.get('path'));",
+                    "    media.setActiveItem('#audioPanel');",
+                    "    Ext.ComponentQuery.query('titlebar#homeTitleBar')[0].setTitle('Audio');",
+                    "}",
+                    "else if(record.get('type').search(/^video/) != -1){",
+                    "    media.getComponent('videoPanel').getComponent('video').setUrl(record.get('path'));",
+                    "    media.setActiveItem('#videoPanel');",
+                    "    Ext.ComponentQuery.query('titlebar#homeTitleBar')[0].setTitle('Video');",
+                    "}",
+                    "else {",
+                    "    media.getComponent('imagePanel').getComponent('image').setSrc(record.get('path'));",
+                    "    media.setActiveItem('#imagePanel');",
+                    "    Ext.ComponentQuery.query('titlebar#homeTitleBar')[0].setTitle('Image');",
+                    "}",
+                    "",
+                    "Ext.ComponentQuery.query('button#backMediaButton')[0].setHidden(false);"
+                ],
+                "name": "disclose",
+                "designer|targetType": "Ext.dataview.List",
+                "designer|controlQuery": "list#mediaList"
+            },
+            "designerId": "1a501ac4-183f-41b4-b687-ad7ccab900c0"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onBackMediaButtonTap",
+                "implHandler": [
+                    "console.log('onBackMediaButtonTap');",
+                    "",
+                    "Ext.ComponentQuery.query('button#backMediaButton')[0].setHidden(true);",
+                    "",
+                    "Ext.ComponentQuery.query('panel#media')[0].setActiveItem('#mediaPanel');"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#backMediaButton"
+            },
+            "designerId": "7a732e39-c7f9-4d52-a6fe-aad5f08761e7"
         }
     ]
 }

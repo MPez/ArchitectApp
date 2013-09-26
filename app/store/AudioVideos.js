@@ -17,6 +17,7 @@ Ext.define('ArchitectApp.store.AudioVideos', {
     extend: 'Ext.data.Store',
 
     requires: [
+        'Ext.data.proxy.LocalStorage',
         'ArchitectApp.model.AudioVideo'
     ],
 
@@ -25,6 +26,9 @@ Ext.define('ArchitectApp.store.AudioVideos', {
         storeId: 'AudioVideos',
         sorters: {
             property: 'timestamp'
+        },
+        proxy: {
+            type: 'localstorage'
         }
     }
 });
