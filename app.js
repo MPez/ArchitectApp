@@ -26,7 +26,8 @@ Ext.application({
         'Barcode',
         'Picture',
         'PersonalInfo',
-        'AudioVideo'
+        'AudioVideo',
+        'DeviceInfo'
     ],
     stores: [
         'Postions',

@@ -45,6 +45,10 @@ Ext.define('ArchitectApp.store.Sensors', {
             {
                 name: 'Barcode',
                 description: 'Permette di leggere un barcode tramite la fotocamera del dispositivo'
+            },
+            {
+                name: 'Device',
+                description: 'Permette di visualizzare le informazioni proprie del device'
             }
         ],
         model: 'ArchitectApp.model.Sensor',

@@ -161,7 +161,6 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
                     var personalInfoStore = Ext.getStore('PersonalInfos'),
                         newInfo = null;
 
-
                     if (personalInfoStore.getCount() === 0) {
                         newInfo = Ext.create('ArchitectApp.model.PersonalInfo', {
                             id: 1,
@@ -182,6 +181,16 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
 
                     var form = Ext.ComponentQuery.query('#fileForm')[0];
                     form.setRecord(newInfo);
+
+                } else if(name == 'device') {
+                    var deviceRecord = Ext.create('ArchitectApp.model.DeviceInfo', {
+                        model: device.model,
+                        platform: device.platform,
+                        version: device.version,
+                        cordova: device.cordova,
+                        uuid: device.uuid
+                    });
+                    Ext.ComponentQuery.query('panel#device')[0].setRecord(deviceRecord);
                 }
             }
 
@@ -303,6 +312,7 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         currentInfo.set('touch', newValues.touch);
         currentInfo.set('cordova', newValues.cordova);
         currentInfo.set('architect', newValues.architect);
+        currentInfo.set('note', newValues.note);
 
         console.log(currentInfo.getData());
 
@@ -463,22 +473,27 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
     onMediaListDisclose: function(list, record, target, index, e, eOpts) {
         console.log('onMediaListDisclose');
 
-        var media = Ext.ComponentQuery.query('panel#media')[0];
+        var media = Ext.ComponentQuery.query('container#mediaContainer')[0];
 
-        if (record.get('type').search(/^audio/) != -1) {
-            media.getComponent('audioPanel').getComponent('audio').setUrl(record.get('path'));
-            media.setActiveItem('#audioPanel');
-            Ext.ComponentQuery.query('titlebar#homeTitleBar')[0].setTitle('Audio');
-        }
-        else if(record.get('type').search(/^video/) != -1){
-            media.getComponent('videoPanel').getComponent('video').setUrl(record.get('path'));
-            media.setActiveItem('#videoPanel');
-            Ext.ComponentQuery.query('titlebar#homeTitleBar')[0].setTitle('Video');
-        }
-        else {
+
+        if (record.get('type').search(/^image/) != -1) {
             media.getComponent('imagePanel').getComponent('image').setSrc(record.get('path'));
             media.setActiveItem('#imagePanel');
             Ext.ComponentQuery.query('titlebar#homeTitleBar')[0].setTitle('Image');
+        } else {
+            if (record.get('type').search(/^audio/) != -1) {
+                media.getComponent('audioPanel').getComponent('audio').setUrl(record.get('path'));
+                media.setActiveItem('#audioPanel');
+                Ext.ComponentQuery.query('titlebar#homeTitleBar')[0].setTitle('Audio');
+            }
+            else if(record.get('type').search(/^video/) != -1){
+                media.getComponent('videoPanel').getComponent('video').setUrl(record.get('path'));
+                media.setActiveItem('#videoPanel');
+                Ext.ComponentQuery.query('titlebar#homeTitleBar')[0].setTitle('Video');
+            }
+
+            Ext.ComponentQuery.query('panel#mediaControlPanel')[0].setHidden(false);
+
         }
 
         Ext.ComponentQuery.query('button#backMediaButton')[0].setHidden(false);
@@ -488,8 +503,9 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         console.log('onBackMediaButtonTap');
 
         Ext.ComponentQuery.query('button#backMediaButton')[0].setHidden(true);
+        Ext.ComponentQuery.query('panel#mediaControlPanel')[0].setHidden(true);
 
-        Ext.ComponentQuery.query('panel#media')[0].setActiveItem('#mediaPanel');
+        Ext.ComponentQuery.query('container#mediaContainer')[0].setActiveItem('#mediaPanel');
     },
 
     onCameraCaptureSuccess: function(image) {
@@ -511,7 +527,7 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
     },
 
     launch: function() {
-        console.log('launch');
+        console.log('onControllerLaunch');
 
         Ext.getStore('Barcodes').load();
         Ext.getStore('Pictures').load();

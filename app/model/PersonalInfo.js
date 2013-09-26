@@ -58,6 +58,10 @@ Ext.define('ArchitectApp.model.PersonalInfo', {
             {
                 name: 'architect',
                 type: 'string'
+            },
+            {
+                name: 'note',
+                type: 'string'
             }
         ],
         validations: [

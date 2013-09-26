@@ -13,7 +13,8 @@
             "Barcode",
             "Picture",
             "PersonalInfo",
-            "AudioVideo"
+            "AudioVideo",
+            "DeviceInfo"
         ],
         "stores": [
             "Postions",

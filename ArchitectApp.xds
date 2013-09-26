@@ -158,6 +158,14 @@
                 "app/model/AudioVideo.js"
             ],
             "className": "AudioVideo"
+        },
+        "b3e77c58-1ceb-4eef-af4c-08e6395446b0": {
+            "paths": [
+                "metadata/model/DeviceInfo",
+                "app/model/override/DeviceInfo.js",
+                "app/model/DeviceInfo.js"
+            ],
+            "className": "DeviceInfo"
         }
     },
     "viewOrderMap": {
@@ -183,7 +191,8 @@
             "35225c05-1a5a-42e6-b80c-c6729cc7bef3",
             "6d56a246-3ee6-488c-8235-1020bb37dff1",
             "23575e37-6659-4bda-83d9-01d5ecf873e7",
-            "f8ed47ff-7233-417e-b946-1daa6d8d22c9"
+            "f8ed47ff-7233-417e-b946-1daa6d8d22c9",
+            "b3e77c58-1ceb-4eef-af4c-08e6395446b0"
         ],
         "resource": [
             "f4b975e2-0737-4227-bae1-af9bd7d98b1b",
