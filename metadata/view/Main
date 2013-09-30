@@ -6,7 +6,7 @@
     },
     "codeClass": null,
     "userConfig": {
-        "fullscreen": null,
+        "fullscreen": true,
         "height": null,
         "itemId": "mainView",
         "designer|userClassName": "Main",
@@ -38,7 +38,7 @@
             "userConfig": {
                 "title": "Home",
                 "iconCls": "home",
-                "height": null,
+                "height": "100%",
                 "itemId": "homeView",
                 "layout": "hbox"
             },
@@ -213,6 +213,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
+                                "height": "100%",
                                 "itemId": "barcode",
                                 "layout": "vbox"
                             },
@@ -291,6 +292,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
+                                "height": "100%",
                                 "itemId": "camera",
                                 "layout": "vbox"
                             },
@@ -384,6 +386,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
+                                "height": "100%",
                                 "itemId": "media",
                                 "layout": "vbox"
                             },
@@ -754,8 +757,9 @@
                             },
                             "codeClass": null,
                             "userConfig": {
+                                "height": "100%",
                                 "itemId": "fileForm",
-                                "scrollable": "vertical"
+                                "scrollable": null
                             },
                             "designerId": "9799e808-3522-4fde-a7a3-89c89cf6ffd7",
                             "cn": [
@@ -1149,6 +1153,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
+                                "height": "100%",
                                 "itemId": "contacts",
                                 "emptyText": "No contacts found.",
                                 "store": "Contacts",
@@ -1181,6 +1186,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
+                                "height": "100%",
                                 "itemId": "device"
                             },
                             "designerId": "3e984f9c-c950-4ec8-a3bb-b948f9028e25",
@@ -1301,6 +1307,7 @@
                     },
                     "codeClass": null,
                     "userConfig": {
+                        "height": "100%",
                         "itemId": "locationPanel"
                     },
                     "designerId": "4dda2ef6-4524-499c-8840-8f376b41d605",
@@ -1361,7 +1368,8 @@
                             "codeClass": null,
                             "userConfig": {
                                 "height": "100%",
-                                "itemId": "map"
+                                "itemId": "map",
+                                "mapOptions": null
                             },
                             "designerId": "3e8a4819-a259-479f-8b51-1951dae53378"
                         }
@@ -1375,6 +1383,7 @@
                     },
                     "codeClass": null,
                     "userConfig": {
+                        "height": "100%",
                         "itemId": "locationVisitedPanel"
                     },
                     "designerId": "66b5ea00-74c5-4fd6-af19-8206b8528ae7",

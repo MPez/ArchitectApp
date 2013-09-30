@@ -22,6 +22,9 @@
                 "type": "object"
             },
             "codeClass": null,
+            "userConfig": {
+                "database": null
+            },
             "designerId": "aadb30e4-0270-4c74-89de-353d97fdd360"
         }
     ]

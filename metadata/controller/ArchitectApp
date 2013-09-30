@@ -9,7 +9,8 @@
         "designer|userClassName": "ArchitectApp",
         "requires": [
             "Ext.MessageBox",
-            "Ext.JSON"
+            "Ext.JSON",
+            "Ext.device.Geolocation"
         ]
     },
     "designerId": "b872ceb2-d6c8-4a63-a1ca-72b7ddfd75ef",
@@ -26,35 +27,25 @@
                 "implHandler": [
                     "console.log('onLocateButtonTap');",
                     "",
+                    "var locationOptions = {",
+                    "    timeout: 15000,",
+                    "    enableHighAccuracy: true",
+                    "};",
+                    "",
+                    "navigator.geolocation.getCurrentPosition(this.onLocateSuccess, this.onLocateError, locationOptions);",
+                    "",
+                    "/*",
                     "Ext.device.Geolocation.getCurrentPosition({",
-                    "    success: function(position) {",
-                    "        var record = Ext.create('ArchitectApp.model.Position', {",
-                    "            latitude: position.coords.latitude,",
-                    "            longitude: position.coords.longitude,",
-                    "            timestamp: position.timestamp",
-                    "        });",
-                    "        var store = Ext.getStore('Positions');",
-                    "        store.add(record);",
-                    "        store.sync();",
-                    "",
-                    "        var mapCmp = Ext.ComponentQuery.query('map#map')[0];",
-                    "        mapCmp.setMapCenter(position.coords);",
-                    "        mapCmp.setMapOptions({",
-                    "            zoom: 15",
-                    "        });",
-                    "",
-                    "        var marker = new google.maps.Marker({",
-                    "            map: mapCmp.getMap(),",
-                    "            position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),",
-                    "            icon: 'resources/images/maps-32.png',",
-                    "            animation: google.maps.Animation.DROP",
-                    "        });",
-                    "    },",
-                    "",
+                    "    success: this.onLocateSuccess,",
                     "    failure: function() {",
+                    "        console.log('onLocateFailure');",
+                    "        ",
                     "        Ext.Msg.alert('Error', 'Something went wrong!');",
-                    "    }",
-                    "});"
+                    "    },",
+                    "    timeout: 15000,",
+                    "    allowHighAccuracy: true",
+                    "});",
+                    "*/"
                 ],
                 "name": "tap",
                 "designer|targetType": "Ext.Button",
@@ -147,12 +138,13 @@
                     "                    surname: 'Software',",
                     "                    email: 'info@soluzioni-sw.it',",
                     "                    address: 'Via dei Ronchi 21',",
-                    "                    birthday: '01/01/1986',",
+                    "                    birthday: '1986-01-01',",
                     "                    sex: 'male',",
                     "                    colour: 'blue' ,",
                     "                    touch: '',",
                     "                    cordova: '',",
-                    "                    architect: ''",
+                    "                    architect: '',",
+                    "                    note: ''",
                     "                });",
                     "            } else {",
                     "                newInfo = personalInfoStore.getAt(0);",
@@ -160,7 +152,7 @@
                     "",
                     "            var form = Ext.ComponentQuery.query('#fileForm')[0];",
                     "            form.setRecord(newInfo);",
-                    "            ",
+                    "",
                     "        } else if(name == 'device') {",
                     "            var deviceRecord = Ext.create('ArchitectApp.model.DeviceInfo', {",
                     "                model: device.model,",
@@ -172,7 +164,7 @@
                     "            Ext.ComponentQuery.query('panel#device')[0].setRecord(deviceRecord);",
                     "        }",
                     "    }",
-                    "\t",
+                    "",
                     "    Ext.ComponentQuery.query('titlebar#homeTitleBar')[0].setTitle(title);",
                     "    Ext.ComponentQuery.query('container#sensorView')[0].setActiveItem('#' + name);",
                     "}"
@@ -521,8 +513,6 @@
                     "currentInfo.set('architect', newValues.architect);",
                     "currentInfo.set('note', newValues.note);",
                     "",
-                    "console.log(currentInfo.getData());",
-                    "",
                     "var errors = currentInfo.validate();",
                     "",
                     "if (!errors.isValid()) {",
@@ -535,7 +525,12 @@
                     "",
                     "var personalInfoStore = Ext.getStore('PersonalInfos');",
                     "",
-                    "personalInfoStore.insert(0,currentInfo);",
+                    "if(personalInfoStore.getCount() === 0) {",
+                    "\tpersonalInfoStore.add(currentInfo);",
+                    "} else {",
+                    "\tpersonalInfoStore.insert(0,currentInfo);",
+                    "}",
+                    "",
                     "personalInfoStore.sync();",
                     "",
                     "Ext.Msg.alert('Attention', 'The Personal Info\\'s store has been saved.');"
@@ -715,7 +710,14 @@
                     "        console.log('onLoad');",
                     "        var personalInfoStore = Ext.getStore('PersonalInfos');",
                     "        var object = Ext.JSON.decode(evt.target.result);",
-                    "        personalInfoStore.insert(0,object);",
+                    "        var record = Ext.create('ArchitectApp.model.PersonalInfo', object);",
+                    "        ",
+                    "        if (personalInfoStore.getCount() === 0) {",
+                    "        \tpersonalInfoStore.add(record);",
+                    "        } else {",
+                    "        \tpersonalInfoStore.insert(0,record);",
+                    "        }",
+                    "        ",
                     "        personalInfoStore.sync();",
                     "        me.onLoadFileButtonTap();",
                     "    };",
@@ -909,6 +911,72 @@
                 "designer|controlQuery": "button#backMediaButton"
             },
             "designerId": "7a732e39-c7f9-4d52-a6fe-aad5f08761e7"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLocateSuccess",
+                "designer|params": [
+                    "position"
+                ],
+                "implHandler": [
+                    "console.log('onLocateSuccess');",
+                    "",
+                    "var record = Ext.create('ArchitectApp.model.Position', {",
+                    "    latitude: position.coords.latitude,",
+                    "    longitude: position.coords.longitude,",
+                    "    altitude: position.coords.altitude,",
+                    "    accuracy: position.coords.accuracy,",
+                    "    altitudeAccuracy: position.coords.altitudeAccuracy,",
+                    "    heading: position.coords.heading,",
+                    "    speed: position.coords.speed,",
+                    "    timestamp: position.timestamp",
+                    "});",
+                    "",
+                    "var store = Ext.getStore('Positions');",
+                    "store.add(record);",
+                    "store.sync();",
+                    "",
+                    "var mapCmp = Ext.ComponentQuery.query('map#map')[0];",
+                    "mapCmp.setMapCenter(position.coords);",
+                    "mapCmp.setMapOptions({",
+                    "    zoom: 15",
+                    "});",
+                    "",
+                    "var marker = new google.maps.Marker({",
+                    "    map: mapCmp.getMap(),",
+                    "    position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),",
+                    "    icon: 'resources/images/maps-32.png',",
+                    "    animation: google.maps.Animation.DROP",
+                    "});"
+                ]
+            },
+            "designerId": "0fec07d4-ce9f-43d0-a6e9-a263be47a402"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLocateError",
+                "designer|params": [
+                    "error"
+                ],
+                "implHandler": [
+                    "console.log('onLocateError');",
+                    "",
+                    "Ext.Msg.alert('Error retrieving position', 'Error: ' + error.code + ', message: ' + error.message );"
+                ]
+            },
+            "designerId": "c1c63fcb-e06d-4b94-930b-39b73a2640f4"
         }
     ]
 }

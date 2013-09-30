@@ -18,7 +18,8 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
 
     requires: [
         'Ext.MessageBox',
-        'Ext.JSON'
+        'Ext.JSON',
+        'Ext.device.Geolocation'
     ],
 
     config: {
@@ -89,35 +90,25 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
     onLocateButtonTap: function(button, e, eOpts) {
         console.log('onLocateButtonTap');
 
+        var locationOptions = {
+            timeout: 15000,
+            enableHighAccuracy: true
+        };
+
+        navigator.geolocation.getCurrentPosition(this.onLocateSuccess, this.onLocateError, locationOptions);
+
+        /*
         Ext.device.Geolocation.getCurrentPosition({
-            success: function(position) {
-                var record = Ext.create('ArchitectApp.model.Position', {
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                    timestamp: position.timestamp
-                });
-                var store = Ext.getStore('Positions');
-                store.add(record);
-                store.sync();
+        success: this.onLocateSuccess,
+        failure: function() {
+        console.log('onLocateFailure');
 
-                var mapCmp = Ext.ComponentQuery.query('map#map')[0];
-                mapCmp.setMapCenter(position.coords);
-                mapCmp.setMapOptions({
-                    zoom: 15
-                });
-
-                var marker = new google.maps.Marker({
-                    map: mapCmp.getMap(),
-                    position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-                    icon: 'resources/images/maps-32.png',
-                    animation: google.maps.Animation.DROP
-                });
-            },
-
-            failure: function() {
-                Ext.Msg.alert('Error', 'Something went wrong!');
-            }
+        Ext.Msg.alert('Error', 'Something went wrong!');
+        },
+        timeout: 15000,
+        allowHighAccuracy: true
         });
+        */
     },
 
     onPositionButtonTap: function(button, e, eOpts) {
@@ -168,12 +159,13 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
                             surname: 'Software',
                             email: 'info@soluzioni-sw.it',
                             address: 'Via dei Ronchi 21',
-                            birthday: '01/01/1986',
+                            birthday: '1986-01-01',
                             sex: 'male',
                             colour: 'blue' ,
                             touch: '',
                             cordova: '',
-                            architect: ''
+                            architect: '',
+                            note: ''
                         });
                     } else {
                         newInfo = personalInfoStore.getAt(0);
@@ -314,8 +306,6 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         currentInfo.set('architect', newValues.architect);
         currentInfo.set('note', newValues.note);
 
-        console.log(currentInfo.getData());
-
         var errors = currentInfo.validate();
 
         if (!errors.isValid()) {
@@ -328,7 +318,12 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
 
         var personalInfoStore = Ext.getStore('PersonalInfos');
 
-        personalInfoStore.insert(0,currentInfo);
+        if(personalInfoStore.getCount() === 0) {
+            personalInfoStore.add(currentInfo);
+        } else {
+            personalInfoStore.insert(0,currentInfo);
+        }
+
         personalInfoStore.sync();
 
         Ext.Msg.alert('Attention', 'The Personal Info\'s store has been saved.');
@@ -438,7 +433,14 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
                 console.log('onLoad');
                 var personalInfoStore = Ext.getStore('PersonalInfos');
                 var object = Ext.JSON.decode(evt.target.result);
-                personalInfoStore.insert(0,object);
+                var record = Ext.create('ArchitectApp.model.PersonalInfo', object);
+
+                if (personalInfoStore.getCount() === 0) {
+                    personalInfoStore.add(record);
+                } else {
+                    personalInfoStore.insert(0,record);
+                }
+
                 personalInfoStore.sync();
                 me.onLoadFileButtonTap();
             };
@@ -608,6 +610,44 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         console.log('onCaptureError');
 
         Ext.Msg.alert('Error', error.code);
+    },
+
+    onLocateSuccess: function(position) {
+        console.log('onLocateSuccess');
+
+        var record = Ext.create('ArchitectApp.model.Position', {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            altitude: position.coords.altitude,
+            accuracy: position.coords.accuracy,
+            altitudeAccuracy: position.coords.altitudeAccuracy,
+            heading: position.coords.heading,
+            speed: position.coords.speed,
+            timestamp: position.timestamp
+        });
+
+        var store = Ext.getStore('Positions');
+        store.add(record);
+        store.sync();
+
+        var mapCmp = Ext.ComponentQuery.query('map#map')[0];
+        mapCmp.setMapCenter(position.coords);
+        mapCmp.setMapOptions({
+            zoom: 15
+        });
+
+        var marker = new google.maps.Marker({
+            map: mapCmp.getMap(),
+            position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+            icon: 'resources/images/maps-32.png',
+            animation: google.maps.Animation.DROP
+        });
+    },
+
+    onLocateError: function(error) {
+        console.log('onLocateError');
+
+        Ext.Msg.alert('Error retrieving position', 'Error: ' + error.code + ', message: ' + error.message );
     }
 
 });

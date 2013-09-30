@@ -6,10 +6,24 @@
     },
     "codeClass": null,
     "userConfig": {
+        "idProperty": null,
+        "identifier": null,
         "designer|userClassName": "PersonalInfo"
     },
     "designerId": "23575e37-6659-4bda-83d9-01d5ecf873e7",
     "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "id"
+            },
+            "designerId": "93fa06fd-a226-4d7e-ba65-4123c5d1254f"
+        },
         {
             "type": "Ext.data.Field",
             "reference": {

@@ -19,16 +19,30 @@ Ext.define('ArchitectApp.model.Position', {
     config: {
         fields: [
             {
-                name: 'latitude',
-                type: 'string'
+                name: 'latitude'
             },
             {
-                name: 'longitude',
-                type: 'string'
+                name: 'longitude'
             },
             {
+                name: 'altitude'
+            },
+            {
+                name: 'accuracy'
+            },
+            {
+                name: 'altitudeAccuracy'
+            },
+            {
+                name: 'heading'
+            },
+            {
+                name: 'speed'
+            },
+            {
+                dateFormat: 'u',
                 name: 'timestamp',
-                type: 'string'
+                type: 'date'
             }
         ]
     }

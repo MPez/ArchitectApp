@@ -19,7 +19,7 @@
             "codeClass": null,
             "userConfig": {
                 "name": "latitude",
-                "type": "string"
+                "type": null
             },
             "designerId": "b57105da-284b-4494-8456-344533f3c941"
         },
@@ -32,7 +32,7 @@
             "codeClass": null,
             "userConfig": {
                 "name": "longitude",
-                "type": "string"
+                "type": null
             },
             "designerId": "a0eac524-556a-407b-8644-0e3def20f68d"
         },
@@ -44,8 +44,69 @@
             },
             "codeClass": null,
             "userConfig": {
+                "name": "altitude"
+            },
+            "designerId": "00f15688-c35d-404b-afd2-3c8feb53f3b7"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "accuracy"
+            },
+            "designerId": "d2c7fc65-a340-48dd-8459-04248a73c508"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "altitudeAccuracy"
+            },
+            "designerId": "4b6b7378-736c-4bbc-8ee2-1d150245e492"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "heading"
+            },
+            "designerId": "3350cacd-5a70-4826-8325-99fbe65d2f24"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "speed"
+            },
+            "designerId": "024e4d9c-66b2-4c7d-9e02-20f4242e4816"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "dateFormat": "u",
                 "name": "timestamp",
-                "type": "string"
+                "type": "date"
             },
             "designerId": "4e5ab154-742a-402c-89f0-fbc77cbff20d"
         }

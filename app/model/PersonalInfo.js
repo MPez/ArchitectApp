@@ -19,6 +19,9 @@ Ext.define('ArchitectApp.model.PersonalInfo', {
     config: {
         fields: [
             {
+                name: 'id'
+            },
+            {
                 name: 'name',
                 type: 'string'
             },

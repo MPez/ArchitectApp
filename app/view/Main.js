@@ -32,12 +32,14 @@ Ext.define('ArchitectApp.view.Main', {
     ],
 
     config: {
+        fullscreen: true,
         itemId: 'mainView',
         items: [
             {
                 xtype: 'container',
                 title: 'Home',
                 iconCls: 'home',
+                height: '100%',
                 itemId: 'homeView',
                 layout: {
                     type: 'hbox'
@@ -117,6 +119,7 @@ Ext.define('ArchitectApp.view.Main', {
                         items: [
                             {
                                 xtype: 'panel',
+                                height: '100%',
                                 itemId: 'barcode',
                                 layout: {
                                     type: 'vbox'
@@ -153,6 +156,7 @@ Ext.define('ArchitectApp.view.Main', {
                             },
                             {
                                 xtype: 'panel',
+                                height: '100%',
                                 itemId: 'camera',
                                 layout: {
                                     type: 'vbox'
@@ -195,6 +199,7 @@ Ext.define('ArchitectApp.view.Main', {
                             },
                             {
                                 xtype: 'panel',
+                                height: '100%',
                                 itemId: 'media',
                                 layout: {
                                     type: 'vbox'
@@ -360,8 +365,8 @@ Ext.define('ArchitectApp.view.Main', {
                             },
                             {
                                 xtype: 'formpanel',
+                                height: '100%',
                                 itemId: 'fileForm',
-                                scrollable: 'vertical',
                                 items: [
                                     {
                                         xtype: 'fieldset',
@@ -547,6 +552,7 @@ Ext.define('ArchitectApp.view.Main', {
                             },
                             {
                                 xtype: 'list',
+                                height: '100%',
                                 itemId: 'contacts',
                                 emptyText: 'No contacts found.',
                                 itemTpl: [
@@ -557,6 +563,7 @@ Ext.define('ArchitectApp.view.Main', {
                             },
                             {
                                 xtype: 'formpanel',
+                                height: '100%',
                                 itemId: 'device',
                                 items: [
                                     {
@@ -615,6 +622,7 @@ Ext.define('ArchitectApp.view.Main', {
                 items: [
                     {
                         xtype: 'panel',
+                        height: '100%',
                         itemId: 'locationPanel',
                         items: [
                             {
@@ -645,6 +653,7 @@ Ext.define('ArchitectApp.view.Main', {
                     },
                     {
                         xtype: 'panel',
+                        height: '100%',
                         itemId: 'locationVisitedPanel',
                         items: [
                             {
