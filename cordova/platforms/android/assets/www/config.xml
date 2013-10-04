@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="it.soluzioniSoftware.ArchitectApp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="foo.bar.ArchitectApp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ArchitectApp</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
-    <author email="info@soluzioni-sw.it" href="http://www.soluzioni-sw.it">
-        Soluzioni Software
+    <author email="dev@callback.apache.org" href="http://cordova.io">
+        Apache Cordova Team
     </author>
     <access origin="*" />
     <preference name="fullscreen" value="true" />

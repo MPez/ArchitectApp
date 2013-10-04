@@ -3,10 +3,10 @@
     "settings": {
         "urlPrefix": "http://localhost/senchaTouchProjects/ArchitectApp/",
         "exportPath": "",
-        "sdkPath": "/var/www/senchaTouchProjects/2.3.0.294"
+        "sdkPath": "/var/www/senchaTouchProjects/touch-2.3.0"
     },
-    "xdsVersion": "2.2.2",
-    "xdsBuild": 991,
+    "xdsVersion": "2.2.3",
+    "xdsBuild": 1039,
     "schemaVersion": 1,
     "upgradeVersion": 210000000503,
     "framework": "touch22",
