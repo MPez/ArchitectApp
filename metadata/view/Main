@@ -103,7 +103,7 @@
                                         ],
                                         "implHandler": [
                                             "console.log('onConnectionButtonHandler');",
-                                            "        ",
+                                            "",
                                             "var type = navigator.connection.type;",
                                             "",
                                             "var states = {};",
@@ -1155,7 +1155,14 @@
                             "userConfig": {
                                 "height": "100%",
                                 "itemId": "contacts",
+                                "masked": [
+                                    "{",
+                                    "    xtype: 'loadmask',",
+                                    "\tmessage: 'Loading contacts, please wait...'",
+                                    "}"
+                                ],
                                 "emptyText": "No contacts found.",
+                                "loadingText": "Loading contacts...",
                                 "store": "Contacts",
                                 "grouped": true
                             },

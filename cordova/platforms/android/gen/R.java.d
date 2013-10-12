@@ -1,4 +1,4 @@
-/var/www/senchaTouchProjects/ArchitectApp/cordova/platforms/android/gen/foo/bar/ArchitectApp/R.java \
+/var/www/senchaTouchProjects/ArchitectApp/cordova/platforms/android/gen/it/soluzioni_sw/ArchitectApp/R.java \
  : /var/www/senchaTouchProjects/ArchitectApp/cordova/platforms/android/res/raw/beep.ogg \
 /var/www/senchaTouchProjects/ArchitectApp/cordova/platforms/android/res/layout-ldpi/capture.xml \
 /var/www/senchaTouchProjects/ArchitectApp/cordova/platforms/android/res/drawable-xhdpi/icon.png \

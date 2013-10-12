@@ -3,7 +3,12 @@
     "settings": {
         "urlPrefix": "http://localhost/senchaTouchProjects/ArchitectApp/",
         "exportPath": "",
-        "sdkPath": "/var/www/senchaTouchProjects/touch-2.3.0"
+        "sdkPath": "/var/www/senchaTouchProjects/touch-2.3.0",
+        "spacesToIndent": 4,
+        "lineEnding": "LF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "buildShouldOverwriteIndex": true
     },
     "xdsVersion": "2.2.3",
     "xdsBuild": 1039,

@@ -107,7 +107,7 @@
         var filterPlatform = window.Ext.filterPlatform = function(platform) {
             var profileMatch = false,
                 ua = navigator.userAgent,
-                j, jln;
+                j, jln, exclude;
 
             platform = [].concat(platform);
 
@@ -175,6 +175,9 @@
                     case 'ie10':
                         profileMatch = /MSIE 10/.test(ua);
                         break;
+                    case 'windows':
+                        profileMatch = /MSIE 10/.test(ua) || /Trident/.test(ua);
+                        break;
                     case 'tizen':
                         profileMatch = /Tizen/.test(ua);
                         break;
@@ -193,12 +196,13 @@
 
             if (typeof path != 'string') {
                 platform = path.platform;
+                exclude = path.exclude;
                 theme = path.theme;
                 path = path.path;
             }
 
             if (platform) {
-                if (!filterPlatform(platform)) {
+                if (!filterPlatform(platform) || filterPlatform(exclude)) {
                     continue;
                 }
                 Ext.theme = {
@@ -213,11 +217,12 @@
 
             if (typeof path != 'string') {
                 platform = path.platform;
+                exclude = path.exclude;
                 path = path.path;
             }
 
             if (platform) {
-                if (!filterPlatform(platform)) {
+                if (!filterPlatform(platform) || filterPlatform(exclude)) {
                     continue;
                 }
             }

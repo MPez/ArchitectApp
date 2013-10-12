@@ -554,10 +554,15 @@ Ext.define('ArchitectApp.view.Main', {
                                 xtype: 'list',
                                 height: '100%',
                                 itemId: 'contacts',
+                                masked: {
+                                    xtype: 'loadmask',
+                                    message: 'Loading contacts, please wait...'
+                                },
                                 emptyText: 'No contacts found.',
                                 itemTpl: [
                                     '<div>{name} {surname} {address} {phoneNumber} {email}</div>'
                                 ],
+                                loadingText: 'Loading contacts...',
                                 store: 'Contacts',
                                 grouped: true
                             },

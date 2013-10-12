@@ -19,7 +19,8 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
     requires: [
         'Ext.MessageBox',
         'Ext.JSON',
-        'Ext.device.Geolocation'
+        'Ext.device.Connection',
+        'Ext.device.Capture'
     ],
 
     config: {
@@ -90,14 +91,39 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
     onLocateButtonTap: function(button, e, eOpts) {
         console.log('onLocateButtonTap');
 
+        var type = navigator.connection.type;
+
         var locationOptions = {
             timeout: 15000,
             enableHighAccuracy: true
         };
 
-        navigator.geolocation.getCurrentPosition(this.onLocateSuccess, this.onLocateError, locationOptions);
+        if(type == Connection.NONE) {
+            console.log('using GPS');
+            navigator.geolocation.getCurrentPosition(this.onLocateSuccess, this.onLocateError, locationOptions);
+        } else {
+            console.log('using cellular connection');
+            navigator.geolocation.getCurrentPosition(this.onLocateSuccess, this.onLocateError, {
+                enableHighAccuracy: false
+            });
+        }
 
 
+        /*
+        if(Ext.device.Connection.isOnline()) {
+        //using cellular connection
+        Ext.device.Geolocation.getCurrentPosition({
+            success: this.onLocateSuccess,
+            failure: function() {
+                console.log('onLocateFailure');
+
+                Ext.Msg.alert('Error', 'Something went wrong!');
+            },
+            timeout: 15000,
+            allowHighAccuracy: false
+        });
+    } else {
+        //using GPS
         Ext.device.Geolocation.getCurrentPosition({
             success: this.onLocateSuccess,
             failure: function() {
@@ -108,13 +134,19 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
             timeout: 15000,
             allowHighAccuracy: true
         });
+    }
+    */
+
+
+
+
+
 
     },
 
     onPositionButtonTap: function(button, e, eOpts) {
         console.log('onPositionButtonTap');
 
-        Ext.getStore('Positions').load();
         var container = Ext.ComponentQuery.query('container#locationView');
         container[0].setActiveItem('#locationVisitedPanel');
     },
@@ -194,6 +226,7 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
     onCameraButtonTap: function(button, e, eOpts) {
         console.log('onCameraButtonTap');
 
+
         navigator.camera.getPicture(this.onCameraCaptureSuccess, this.onCameraCaptureFailure, {
             quality : 100,
             destinationType : Camera.DestinationType.FILE_URI,
@@ -206,7 +239,8 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         });
 
 
-        /*Ext.device.Camera.capture({
+        /*
+        Ext.device.Camera.capture({
         success: this.onCameraCaptureSuccess,
         failure: this.onCameraCaptureFailure,
         quality: 100,
@@ -214,11 +248,13 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         width: 400,
         height: 400,
         destination: 'file'
-        });*/
+        });
+        */
     },
 
     onGalleryButtonTap: function(button, e, eOpts) {
         console.log('onGalleryButtonTap');
+
 
         navigator.camera.getPicture(this.onCameraCaptureSuccess, this.onCameraCaptureFailure, {
             quality : 100,
@@ -231,8 +267,8 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
             saveToPhotoAlbum: false
         });
 
-
-        /*Ext.device.Camera.capture({
+        /*
+        Ext.device.Camera.capture({
         success: this.onCameraCaptureSuccess,
         failure: this.onCameraCaptureFailure,
         quality: 100,
@@ -240,7 +276,8 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         width: 400,
         height: 400,
         destination: 'file'
-        });*/
+        });
+        */
     },
 
     onLoadContactsButtonTap: function(button, e, eOpts) {
@@ -251,7 +288,22 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
             filter: '',
             multiple: true
         };
+
+        Ext.ComponentQuery.query('#contacts')[0].setMasked(true);
+
+
         navigator.contacts.find(contactFields, this.onContactSuccess, this.onContactError, contactFindOptions);
+
+
+        /*
+        var config = {
+        fields: contactFields,
+        success: this.onContactSuccess,
+        failure: this.onContactError
+        };
+
+        Ext.device.Contacts.getContacts(config);
+        */
     },
 
     onTrashContactsButtonTap: function(button, e, eOpts) {
@@ -275,6 +327,7 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
                     code: result.text,
                     format: result.format
                 });
+
                 var barcodeStore = Ext.getStore('Barcodes');
                 barcodeStore.add(barcode);
                 barcodeStore.sync();
@@ -353,6 +406,7 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         var record = store.getAt(0).getData();
         var string = Ext.JSON.encode(record);
 
+
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
 
         function gotFS(fileSystem) {
@@ -385,12 +439,72 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
             console.log(error.code);
             Ext.Msg.alert('Error', error.code);
         }
+
+        /*
+        Ext.device.FileSystem.requestFileSystem({
+        type: window.PERSISTENT,
+        size: 10 * 1024 * 1024,
+        success: fileSystemSuccess, 
+        failure: failure
+        });
+
+        function fileSystemSuccess(fileSystem) {
+        console.log('onFileSystmeSuccess');
+
+        fileSystem.getRoot().getDirectory({
+        path: 'ArchitectApp',
+        options: {
+        create: true,
+        exclusive: false
+        },
+        success: directorySuccess,
+        failure: failure
+        });
+        }
+
+        function directorySuccess(directory) {
+        console.log('onDirectorySuccess');
+
+        directory.getFile({
+        path: 'backupPersonalInfoSencha.txt',
+        options: {
+        create: true,
+        exclusive: false
+        },
+        success: fileSuccess,
+        failure: failure
+        });
+        }
+
+        function fileSuccess(file) {
+        console.log('onFileSuccess');
+
+        file.write({
+        data: string,
+        success: writeSuccess,
+        failure: failure
+        });
+        }
+
+        function writeSuccess() {
+        console.log('onWriteSuccess');
+
+        Ext.Msg.alert('Success', 'The Personal Info\'s store has been backed up.');
+        }
+
+        function failure(error) {
+        console.log('onFailure');
+
+        Ext.Msg.alert('Error', error.code);
+        }
+        */
     },
 
     onRestoreFileButtonTap: function(button, e, eOpts) {
         console.log('onRestoreFileButtonTap');
 
         var me = this;
+
 
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
 
@@ -441,18 +555,103 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
             console.log(error.code);
             Ext.Msg.alert('Error', error.code);
         }
+
+        /*
+        Ext.device.FileSystem.requestFileSystem({
+        type: window.PERSISTENT,
+        size: 10 * 1024 * 1024,
+        success: fileSystemSuccess, 
+        failure: failure
+        });
+
+        function fileSystemSuccess(fileSystem) {
+        console.log('onFileSystmeSuccess');
+
+        fileSystem.getRoot().getDirectory({
+        path: 'ArchitectApp',
+        options: {
+        create: true,
+        exclusive: false
+        },
+        success: directorySuccess,
+        failure: failure
+        });
+        }
+
+        function directorySuccess(directory) {
+        console.log('onDirectorySuccess');
+
+        directory.getFile({
+        path: 'backupPersonalInfoSencha.txt',
+        options: {
+        create: true,
+        exclusive: false
+        },
+        success: fileSuccess,
+        failure: failure
+        });
+        }
+
+        function fileSuccess(file) {
+        console.log('onFileSuccess');
+
+        file.read({
+        type: 'text',
+        success: readSuccess,
+        failure: failure
+        });
+        }
+
+        function readSuccess(data) {
+        console.log('onWriteSuccess');
+
+        var personalInfoStore = Ext.getStore('PersonalInfos');
+        var object = Ext.JSON.decode(data);
+        var record = Ext.create('ArchitectApp.model.PersonalInfo', object);
+
+        personalInfoStore.insert(0,record);
+        personalInfoStore.sync();
+        me.onLoadFileButtonTap();
+        }
+
+        function failure(error) {
+        console.log('onFailure');
+
+        Ext.Msg.alert('Error', error.code);
+        }
+        */
     },
 
     onAudioButtonTap: function(button, e, eOpts) {
         console.log('onAudioButtonTap');
 
+
         navigator.device.capture.captureAudio(this.onCaptureMediaSuccess, this.onCaptureError);
+
+
+        /*
+        Ext.device.Capture.captureAudio({
+        limit: 1,
+        success: this.onCaptureMediaSuccess,
+        failure: this.onCaptureError
+        });
+        */
     },
 
     onVideoButtonTap: function(button, e, eOpts) {
         console.log('onVideoButtonTap');
 
+
         navigator.device.capture.captureVideo(this.onCaptureMediaSuccess, this.onCaptureError);
+
+
+        /*
+        Ext.device.Capture.captureVideo({
+        limit: 1,
+        success: this.onCaptureMediaSuccess,
+        failure: this.onCaptureError
+        });
+        */
     },
 
     onImageButtonTap: function(button, e, eOpts) {
@@ -525,10 +724,13 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         Ext.getStore('Contacts').load();
         Ext.getStore('PersonalInfos').load();
         Ext.getStore('AudioVideos').load();
+        Ext.getStore('Positions').load();
     },
 
     onContactSuccess: function(contacts) {
         console.log('onContactSuccess');
+
+        Ext.ComponentQuery.query('#contacts')[0].setMasked(false);
 
         Ext.Msg.alert('Success', 'The contacts has been successfully loaded.');
 
@@ -604,6 +806,19 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
     onLocateSuccess: function(position) {
         console.log('onLocateSuccess');
 
+        var mapCmp = Ext.ComponentQuery.query('map#map')[0];
+        mapCmp.setMapCenter(position.coords);
+        mapCmp.setMapOptions({
+            zoom: 15
+        });
+
+        var marker = new google.maps.Marker({
+            map: mapCmp.getMap(),
+            position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+            icon: 'resources/images/maps-32.png',
+            animation: google.maps.Animation.DROP
+        });
+
         var record = Ext.create('ArchitectApp.model.Position', {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
@@ -618,19 +833,6 @@ Ext.define('ArchitectApp.controller.ArchitectApp', {
         var store = Ext.getStore('Positions');
         store.add(record);
         store.sync();
-
-        var mapCmp = Ext.ComponentQuery.query('map#map')[0];
-        mapCmp.setMapCenter(position.coords);
-        mapCmp.setMapOptions({
-            zoom: 15
-        });
-
-        var marker = new google.maps.Marker({
-            map: mapCmp.getMap(),
-            position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-            icon: 'resources/images/maps-32.png',
-            animation: google.maps.Animation.DROP
-        });
     },
 
     onLocateError: function(error) {
